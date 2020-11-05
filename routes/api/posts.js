@@ -56,7 +56,7 @@ router.get('/', auth, async (req, res) => {
 });
 
 // @route       GET api/posts/:id
-// @desc        Get all posts
+// @desc        Get post by id
 // @access      Private
 router.get('/:id', auth, async (req, res) => {
    try {
