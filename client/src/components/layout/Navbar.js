@@ -12,6 +12,7 @@ const useStyles = makeStyles((theme) => ({
    },
    title: {
       flexGrow: 1,
+      textDecoration: 'none',
    },
 }));
 
@@ -22,7 +23,14 @@ const Navbar = () => {
       <div className={classes.root}>
          <AppBar position="static">
             <Toolbar>
-               <Typography edge="start" variant="h6" className={classes.title}>
+               <Typography
+                  edge="start"
+                  variant="h6"
+                  color="inherit"
+                  className={classes.title}
+                  component={RouterLink}
+                  to="/"
+               >
                   Dev Connect
                </Typography>
                <Button color="inherit" href="!#">
@@ -32,7 +40,12 @@ const Navbar = () => {
                   Register
                </Button>
 
-               <Button color="inherit" component={RouterLink} to="/login">
+               <Button
+                  color="secondary"
+                  variant="contained"
+                  component={RouterLink}
+                  to="/login"
+               >
                   Login
                </Button>
             </Toolbar>
