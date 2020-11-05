@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { Fragment } from 'react';
+import './App.css';
 
-const App = () => <div> My App!</div>;
+const App = () => <Fragment> My App!</Fragment>;
 
 export default App;
