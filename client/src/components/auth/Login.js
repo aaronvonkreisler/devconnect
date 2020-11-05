@@ -7,10 +7,10 @@ import { makeStyles } from '@material-ui/core/styles';
 const useStyles = makeStyles((theme) => ({
    root: {
       '& .MuiTextField-root': {
-         marginTop: theme.spacing(1),
+         marginTop: theme.spacing(2),
       },
       '& .MuiButtonBase-root': {
-         marginTop: theme.spacing(1),
+         marginTop: theme.spacing(2),
       },
    },
 }));
