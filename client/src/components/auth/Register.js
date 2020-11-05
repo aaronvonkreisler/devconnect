@@ -1,12 +1,13 @@
 import React, { Fragment, useState } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import { TextField, Button } from '@material-ui/core';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import { makeStyles } from '@material-ui/core/styles';
-import PropTypes from 'prop-types';
 
 import { setAlert } from '../../actions/alert';
+import { register } from '../../actions/auth';
 
 const useStyles = makeStyles((theme) => ({
    root: {
@@ -19,7 +20,7 @@ const useStyles = makeStyles((theme) => ({
    },
 }));
 
-const Register = ({ setAlert }) => {
+const Register = ({ setAlert, register }) => {
    const classes = useStyles();
    const [formData, setFormData] = useState({
       name: '',
@@ -36,9 +37,9 @@ const Register = ({ setAlert }) => {
    const onFormSubmit = async (e) => {
       e.preventDefault();
       if (password !== password2) {
-         setAlert('Passwords do not match', 'error');
+         setAlert('Passwords do not match', 'toast', 'error');
       } else {
-         console.log('Success!');
+         register({ name, email, password });
       }
    };
 
@@ -52,7 +53,6 @@ const Register = ({ setAlert }) => {
             <div>
                <TextField
                   fullWidth
-                  required
                   label="Name"
                   type="text"
                   variant="outlined"
@@ -64,7 +64,6 @@ const Register = ({ setAlert }) => {
             <div>
                <TextField
                   fullWidth
-                  required
                   label="Email Address"
                   type="email"
                   variant="outlined"
@@ -76,12 +75,10 @@ const Register = ({ setAlert }) => {
             <div>
                <TextField
                   fullWidth
-                  required
                   label="Password"
                   type="password"
                   variant="outlined"
                   name="password"
-                  minLength="6"
                   value={password}
                   onChange={(e) => onTextChange(e)}
                />
@@ -89,12 +86,10 @@ const Register = ({ setAlert }) => {
             <div>
                <TextField
                   fullWidth
-                  required
                   label="Confirm Password"
                   type="password"
                   variant="outlined"
                   name="password2"
-                  minLength="6"
                   value={password2}
                   onChange={(e) => onTextChange(e)}
                />
@@ -112,6 +107,7 @@ const Register = ({ setAlert }) => {
 
 Register.propTypes = {
    setAlert: PropTypes.func.isRequired,
+   register: PropTypes.func.isRequired,
 };
 
-export default connect(null, { setAlert })(Register);
+export default connect(null, { setAlert, register })(Register);
