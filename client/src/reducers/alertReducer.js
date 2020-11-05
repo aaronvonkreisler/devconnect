@@ -2,7 +2,8 @@ import { SET_ALERT, REMOVE_ALERT } from '../actions/types';
 
 const initialState = [];
 
-const alertReducer = (state = initialState, action) => {
+// eslint-disable-next-line import/no-anonymous-default-export
+export default (state = initialState, action) => {
    const { type, payload } = action;
 
    switch (type) {
@@ -14,5 +15,3 @@ const alertReducer = (state = initialState, action) => {
          return state;
    }
 };
-
-export default alertReducer;

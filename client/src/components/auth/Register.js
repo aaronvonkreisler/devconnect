@@ -1,13 +1,17 @@
 import React, { Fragment, useState } from 'react';
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { TextField, Button } from '@material-ui/core';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import { makeStyles } from '@material-ui/core/styles';
+import PropTypes from 'prop-types';
+
+import { setAlert } from '../../actions/alert';
 
 const useStyles = makeStyles((theme) => ({
    root: {
       '& .MuiTextField-root': {
-         marginTop: theme.spacing(1),
+         marginTop: theme.spacing(2),
       },
       '& .MuiButtonBase-root': {
          marginTop: theme.spacing(1),
@@ -15,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
    },
 }));
 
-const Register = () => {
+const Register = ({ setAlert }) => {
    const classes = useStyles();
    const [formData, setFormData] = useState({
       name: '',
@@ -32,7 +36,7 @@ const Register = () => {
    const onFormSubmit = async (e) => {
       e.preventDefault();
       if (password !== password2) {
-         console.log('Passwords do not match');
+         setAlert('Passwords do not match', 'error');
       } else {
          console.log('Success!');
       }
@@ -106,4 +110,8 @@ const Register = () => {
    );
 };
 
-export default Register;
+Register.propTypes = {
+   setAlert: PropTypes.func.isRequired,
+};
+
+export default connect(null, { setAlert })(Register);
