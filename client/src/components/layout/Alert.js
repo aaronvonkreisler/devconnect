@@ -20,23 +20,39 @@ const Alert = (props) => {
    return (
       props.alerts !== null &&
       props.alerts.length > 0 &&
-      props.alerts.map((alert) => (
-         <div key={alert.id} className={classes.root}>
-            <Snackbar
-               anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
-               open={open}
-               TransitionComponent={transition}
-            >
-               <MuiAlert
-                  elevation={6}
-                  variant="filled"
-                  severity={alert.alertType}
-               >
-                  {alert.msg}
-               </MuiAlert>
-            </Snackbar>
-         </div>
-      ))
+      props.alerts.map((alert) => {
+         if (alert.alertType === 'toast') {
+            return (
+               <div key={alert.id} className={classes.root}>
+                  <Snackbar
+                     anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
+                     open={open}
+                     TransitionComponent={transition}
+                  >
+                     <MuiAlert
+                        elevation={6}
+                        variant="filled"
+                        severity={alert.severity}
+                     >
+                        {alert.msg}
+                     </MuiAlert>
+                  </Snackbar>
+               </div>
+            );
+         } else {
+            return (
+               <div key={alert.id} className={classes.root}>
+                  <MuiAlert
+                     elevation={6}
+                     variant="filled"
+                     severity={alert.severity}
+                  >
+                     {alert.msg}
+                  </MuiAlert>
+               </div>
+            );
+         }
+      })
    );
 };
 
