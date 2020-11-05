@@ -1,4 +1,5 @@
 import React, { Fragment, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { TextField, Button } from '@material-ui/core';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import { makeStyles } from '@material-ui/core/styles';
@@ -6,7 +7,10 @@ import { makeStyles } from '@material-ui/core/styles';
 const useStyles = makeStyles((theme) => ({
    root: {
       '& .MuiTextField-root': {
-         margin: theme.spacing(1),
+         marginTop: theme.spacing(1),
+      },
+      '& .MuiButtonBase-root': {
+         marginTop: theme.spacing(1),
       },
    },
 }));
@@ -95,6 +99,9 @@ const Register = () => {
                Sign Up
             </Button>
          </form>
+         <p>
+            Already have an account? <Link to="/login">Sign In</Link>
+         </p>
       </Fragment>
    );
 };
