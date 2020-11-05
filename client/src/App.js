@@ -15,7 +15,7 @@ const App = () => {
             <CssBaseline>
                <Navbar />
                <Route exact path="/" component={Landing} />
-               <Container>
+               <Container style={{ marginTop: '2rem' }}>
                   <Switch>
                      <Route exact path="/register" component={Register} />
                      <Route exact path="/login" component={Login} />

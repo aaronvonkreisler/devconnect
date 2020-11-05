@@ -1,5 +1,6 @@
 import React from 'react';
 import { Button } from '@material-ui/core';
+import { Link as RouterLink } from 'react-router-dom';
 
 const Landing = () => {
    return (
@@ -15,14 +16,16 @@ const Landing = () => {
                   <Button
                      variant="contained"
                      color="primary"
-                     href="register.html"
+                     component={RouterLink}
+                     to="/register"
                   >
                      Sign Up
                   </Button>
                   <Button
                      variant="contained"
-                     href="login.html"
                      style={{ marginLeft: '10px' }}
+                     component={RouterLink}
+                     to="/login"
                   >
                      Login
                   </Button>
