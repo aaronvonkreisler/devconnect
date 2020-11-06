@@ -26,6 +26,9 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
 
    const authLinks = (
       <React.Fragment>
+         <Button color="inherit" component={RouterLink} to="/dashboard">
+            Dashboard
+         </Button>
          <Button color="inherit" onClick={logout}>
             Logout
          </Button>
