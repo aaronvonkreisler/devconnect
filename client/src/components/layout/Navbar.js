@@ -9,6 +9,7 @@ import { logout } from '../../actions/auth';
 const useStyles = makeStyles((theme) => ({
    root: {
       flexGrow: 1,
+      color: 'white',
    },
    menuButton: {
       marginRight: theme.spacing(2),
@@ -16,6 +17,7 @@ const useStyles = makeStyles((theme) => ({
    title: {
       flexGrow: 1,
       textDecoration: 'none',
+      color: 'white',
    },
 }));
 
@@ -24,7 +26,7 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
 
    const authLinks = (
       <React.Fragment>
-         <Button color="secondary" variant="contained" onClick={logout}>
+         <Button color="inherit" onClick={logout}>
             Logout
          </Button>
       </React.Fragment>

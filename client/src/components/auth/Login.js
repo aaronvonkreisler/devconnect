@@ -2,14 +2,7 @@ import React, { Fragment, useState } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Link, Redirect } from 'react-router-dom';
-import {
-   TextField,
-   Button,
-   Grid,
-   Container,
-   Typography,
-   Paper,
-} from '@material-ui/core';
+import { TextField, Button, Grid, Card, Typography } from '@material-ui/core';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import { makeStyles } from '@material-ui/core/styles';
 import { login } from '../../actions/auth';
@@ -48,69 +41,68 @@ const Login = ({ login, isAuthenticated }) => {
    }
 
    return (
-      <Fragment>
-         <Grid
-            container
-            direction="row"
-            justify="space-between"
-            alignItems="center"
-         >
-            <Grid item xs={6}>
-               Left Grid
-            </Grid>
-            <Grid item xs={6}>
-               <Paper>
-                  <Container>
-                     <h1 className="large text-primary">Sign In</h1>
-                     <p className="lead">
-                        <AccountCircleIcon /> Sign In To Your Account
-                     </p>
-                     <form
-                        className={classes.root}
-                        onSubmit={(e) => onFormSubmit(e)}
-                     >
-                        <div>
-                           <TextField
-                              fullWidth
-                              required
-                              label="Email Address"
-                              type="email"
-                              variant="outlined"
-                              name="email"
-                              value={email}
-                              onChange={(e) => onTextChange(e)}
-                           />
-                        </div>
-                        <div>
-                           <TextField
-                              fullWidth
-                              required
-                              label="Password"
-                              type="password"
-                              variant="outlined"
-                              name="password"
-                              minLength="6"
-                              value={password}
-                              onChange={(e) => onTextChange(e)}
-                           />
-                        </div>
-                        <Button
-                           type="submit"
-                           color="primary"
-                           variant="contained"
+      <div className="signup flex flex-center w-100 h-100vh">
+         <div className="p-8">
+            <Card className="signup-card position-relative y-center">
+               <Grid container>
+                  <Grid item lg={5} md={5} sm={5} xs={12}>
+                     <div className="p-32 flex flex-center flex-middle h-100">
+                        <img
+                           src="/assets/illustrations/standing-22.svg"
+                           alt=""
+                        />
+                     </div>
+                  </Grid>
+                  <Grid item lg={7} md={7} sm={7} xs={12}>
+                     <div className="p-36 h-100 bg-light-gray position relative">
+                        <Typography variant="h5">Welcome back!</Typography>
+                        <form
+                           className={classes.root}
+                           onSubmit={(e) => onFormSubmit(e)}
                         >
-                           Sign In
-                        </Button>
-                     </form>
-                     <p>
-                        Don't have an account?{' '}
-                        <Link to="/register">Sign Up!</Link>
-                     </p>
-                  </Container>
-               </Paper>
-            </Grid>
-         </Grid>
-      </Fragment>
+                           <div>
+                              <TextField
+                                 fullWidth
+                                 required
+                                 label="Email Address"
+                                 type="email"
+                                 variant="outlined"
+                                 name="email"
+                                 value={email}
+                                 onChange={(e) => onTextChange(e)}
+                              />
+                           </div>
+                           <div>
+                              <TextField
+                                 fullWidth
+                                 required
+                                 label="Password"
+                                 type="password"
+                                 variant="outlined"
+                                 name="password"
+                                 minLength="6"
+                                 value={password}
+                                 onChange={(e) => onTextChange(e)}
+                              />
+                           </div>
+                           <Button
+                              type="submit"
+                              color="primary"
+                              variant="contained"
+                           >
+                              Sign In
+                           </Button>
+                        </form>
+                        <Typography variant="subtitle1">
+                           Don't have an account?{' '}
+                           <Link to="/register">Sign Up!</Link>
+                        </Typography>
+                     </div>
+                  </Grid>
+               </Grid>
+            </Card>
+         </div>
+      </div>
    );
 };
 

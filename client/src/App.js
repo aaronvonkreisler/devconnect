@@ -34,18 +34,17 @@ const App = () => {
                <CssBaseline>
                   <Navbar />
                   <Route exact path="/" component={Landing} />
-                  <Container style={{ marginTop: '2rem' }}>
-                     <Alert />
-                     <Switch>
-                        <Route exact path="/register" component={Register} />
-                        <Route exact path="/login" component={Login} />
-                        <PrivateRoute
-                           exact
-                           path="/dashboard"
-                           component={Dashboard}
-                        />
-                     </Switch>
-                  </Container>
+
+                  <Alert />
+                  <Switch>
+                     <Route exact path="/register" component={Register} />
+                     <Route exact path="/login" component={Login} />
+                     <PrivateRoute
+                        exact
+                        path="/dashboard"
+                        component={Dashboard}
+                     />
+                  </Switch>
                </CssBaseline>
             </Fragment>
          </Router>
