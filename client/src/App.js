@@ -6,6 +6,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import { Container } from '@material-ui/core';
 
 import './App.css';
+import './styles/_app.scss';
 import Alert from './components/layout/Alert';
 import Dashboard from './components/dashboard/Dashboard';
 import Landing from './components/layout/Landing';

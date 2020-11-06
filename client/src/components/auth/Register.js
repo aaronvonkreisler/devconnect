@@ -6,7 +6,7 @@ import {
    TextField,
    Button,
    Grid,
-   Paper,
+   Card,
    Container,
    Typography,
 } from '@material-ui/core';
@@ -39,15 +39,6 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
       password2: '',
    });
 
-   useLayoutEffect(() => {
-      document.body.style.background =
-         'linear-gradient(90deg, pink 50%, #F0F0F0 50%)';
-
-      return () => {
-         document.body.style.background = 'white';
-      };
-   }, []);
-
    const { name, email, password, password2 } = formData;
 
    const onTextChange = (e) =>
@@ -67,7 +58,7 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
    }
 
    return (
-      <Fragment>
+      <div className="signup">
          <Grid
             container
             direction="row"
@@ -78,7 +69,7 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
                Left side Container
             </Grid>
             <Grid item xs={6}>
-               <Paper>
+               <Card>
                   <Container>
                      <Typography variant="h4" className={classes.title}>
                         Sign Up
@@ -148,10 +139,10 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
                         <Link to="/login">Sign In</Link>
                      </Typography>
                   </Container>
-               </Paper>
+               </Card>
             </Grid>
          </Grid>
-      </Fragment>
+      </div>
    );
 };
 
