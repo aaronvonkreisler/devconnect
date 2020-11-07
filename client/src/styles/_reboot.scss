@@ -1,32 +1,30 @@
 #root,
 body,
 html {
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  position: relative;
+   width: 100%;
+   height: 100%;
 }
 
 html {
-  font-size: 16px;
+   font-size: 16px;
 }
 
 body {
-  margin: 0;
-  padding: 0;
-  font-weight: $font-weight-base;
-  font-size: $font-size-base;
-  line-height: 1.5;
-  font-family: $font-family-base;
+   margin: 0;
+   padding: 0;
+   font-weight: $font-weight-base;
+   font-size: $font-size-base;
+   line-height: 1.5;
+   font-family: $font-family-base;
 }
 
 div,
 a {
-  box-sizing: border-box;
+   box-sizing: border-box;
 }
 
 img {
-  max-width: 100%;
+   max-width: 100%;
 }
 h1,
 h2,
@@ -35,8 +33,8 @@ h4,
 h5,
 h6,
 .card-title {
-  color: $text-body !important;
-  font-weight: 500;
+   color: $text-body !important;
+   font-weight: 500;
 }
 
 .layout1,
@@ -44,5 +42,5 @@ h6,
 .MuiPaper-root,
 .MuiTableCell-body,
 .egret-customizer {
-  color: $text-body !important;
+   color: $text-body !important;
 }
