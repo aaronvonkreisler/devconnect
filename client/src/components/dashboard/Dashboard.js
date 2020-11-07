@@ -1,13 +1,15 @@
 import React, { useEffect } from 'react';
+import { Link as RouterLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Container } from '@material-ui/core';
+import { Container, Typography, Button } from '@material-ui/core';
+
 import { getCurrentProfile } from '../../actions/profile';
 import Spinner from '../layout/Spinner';
 
 const Dashboard = ({
    getCurrentProfile,
-   auth,
+   auth: { user },
    profile: { profile, loading },
 }) => {
    useEffect(() => {
@@ -17,7 +19,28 @@ const Dashboard = ({
    return loading && profile === null ? (
       <Spinner />
    ) : (
-      <React.Fragment>Testing</React.Fragment>
+      <Container style={{ marginTop: '2rem' }}>
+         <React.Fragment>
+            <Typography variant="h5">Welcome {user && user.name}!</Typography>
+            {profile !== null ? (
+               // User has a profile -- render dashboard
+               <React.Fragment>Has</React.Fragment>
+            ) : (
+               // User does not have a profile yet - render this
+               <React.Fragment>
+                  <p>You have not yet setup a profile, please add some info</p>
+                  <Button
+                     component={RouterLink}
+                     to="/create-profile"
+                     color="primary"
+                     variant="contained"
+                  >
+                     Create Profile
+                  </Button>
+               </React.Fragment>
+            )}
+         </React.Fragment>
+      </Container>
    );
 };
 
