@@ -3,8 +3,8 @@ import { Link as RouterLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Container, Typography, Button } from '@material-ui/core';
-
 import { getCurrentProfile } from '../../actions/profile';
+import DashboardActions from './DashboardActions';
 import Spinner from '../layout/Spinner';
 
 const Dashboard = ({
@@ -24,7 +24,9 @@ const Dashboard = ({
             <Typography variant="h5">Welcome {user && user.name}!</Typography>
             {profile !== null ? (
                // User has a profile -- render dashboard
-               <React.Fragment>Has</React.Fragment>
+               <React.Fragment>
+                  <DashboardActions />
+               </React.Fragment>
             ) : (
                // User does not have a profile yet - render this
                <React.Fragment>
