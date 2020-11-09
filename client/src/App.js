@@ -7,6 +7,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import './App.css';
 import './styles/_app.scss';
 import Alert from './components/layout/Alert';
+import AddExperience from './components/profile-form/AddExperience';
 import CreateProfile from './components/profile-form/CreateProfile';
 import Dashboard from './components/dashboard/Dashboard';
 import EditProfile from './components/profile-form/EditProfile';
@@ -55,6 +56,11 @@ const App = () => {
                         exact
                         path="/edit-profile"
                         component={EditProfile}
+                     />
+                     <PrivateRoute
+                        exact
+                        path="/add-experience"
+                        component={AddExperience}
                      />
                   </Switch>
                </CssBaseline>
