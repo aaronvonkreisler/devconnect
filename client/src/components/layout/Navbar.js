@@ -1,8 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { Link as RouterLink } from 'react-router-dom';
-import { AppBar, Toolbar, Typography, Button } from '@material-ui/core';
+import {
+   AppBar,
+   Toolbar,
+   Typography,
+   Button,
+   IconButton,
+   Menu,
+   MenuItem,
+} from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
+import AccountCircle from '@material-ui/icons/AccountCircle';
 import PropTypes from 'prop-types';
 import { logout } from '../../actions/auth';
 
@@ -23,6 +32,16 @@ const useStyles = makeStyles((theme) => ({
 
 const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
    const classes = useStyles();
+   const [anchorEl, setAnchorEl] = useState(null);
+   const open = Boolean(anchorEl);
+
+   const handleMenu = (e) => {
+      setAnchorEl(e.currentTarget);
+   };
+
+   const handleClose = () => {
+      setAnchorEl(null);
+   };
 
    const authLinks = (
       <React.Fragment>
@@ -32,6 +51,33 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
          <Button color="inherit" onClick={logout}>
             Logout
          </Button>
+         <IconButton
+            aria-label="account of current user"
+            aria-controls="menu-appbar"
+            aria-haspopup="true"
+            onClick={handleMenu}
+            color="inherit"
+         >
+            <AccountCircle />
+         </IconButton>
+         <Menu
+            id="menu-appbar"
+            anchorEl={anchorEl}
+            anchorOrigin={{
+               vertical: 'top',
+               horizontal: 'right',
+            }}
+            keepMounted
+            transformOrigin={{
+               vertical: 'top',
+               horizontal: 'right',
+            }}
+            open={open}
+            onClose={handleClose}
+         >
+            <MenuItem onClick={handleClose}>Profile</MenuItem>
+            <MenuItem onClick={handleClose}>My account</MenuItem>
+         </Menu>
       </React.Fragment>
    );
 
