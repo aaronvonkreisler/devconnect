@@ -3,12 +3,16 @@ import { Link as RouterLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Container, Typography, Button } from '@material-ui/core';
-import { getCurrentProfile } from '../../actions/profile';
+import { getCurrentProfile, deleteAccount } from '../../actions/profile';
+import Education from './Education';
+import Experience from './Experience';
 import DashboardActions from './DashboardActions';
 import Spinner from '../layout/Spinner';
+import AccountCircle from '@material-ui/icons/AccountCircle';
 
 const Dashboard = ({
    getCurrentProfile,
+   deleteAccount,
    auth: { user },
    profile: { profile, loading },
 }) => {
@@ -26,6 +30,18 @@ const Dashboard = ({
                // User has a profile -- render dashboard
                <React.Fragment>
                   <DashboardActions />
+                  <Experience experience={profile.experience} />
+                  <Education education={profile.education} />
+                  <div className="my-2">
+                     <Button
+                        variant="contained"
+                        color="secondary"
+                        startIcon={<AccountCircle />}
+                        onClick={() => deleteAccount()}
+                     >
+                        Delete Account
+                     </Button>
+                  </div>
                </React.Fragment>
             ) : (
                // User does not have a profile yet - render this
@@ -55,6 +71,9 @@ Dashboard.propTypes = {
 const mapStateToProps = (state) => ({
    auth: state.auth,
    profile: state.profile,
+   deleteAccount: PropTypes.func.isRequired,
 });
 
-export default connect(mapStateToProps, { getCurrentProfile })(Dashboard);
+export default connect(mapStateToProps, { getCurrentProfile, deleteAccount })(
+   Dashboard
+);
