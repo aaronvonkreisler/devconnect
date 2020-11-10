@@ -4,12 +4,12 @@ import { connect } from 'react-redux';
 import ProfileItem from './ProfileItem';
 import Spinner from '../layout/Spinner';
 import { getProfiles } from '../../actions/profile';
-import { Button, Card, Container, Typography } from '@material-ui/core';
+import { Container, Typography } from '@material-ui/core';
 
 const Profiles = ({ getProfiles, profile: { profiles, loading } }) => {
    useEffect(() => {
       getProfiles();
-   }, []);
+   }, [getProfiles]);
    return (
       <Container style={{ marginTop: '2rem' }}>
          {loading ? (
