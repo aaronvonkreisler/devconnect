@@ -48,6 +48,9 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
          <Button color="inherit" component={RouterLink} to="/dashboard">
             Dashboard
          </Button>
+         <Button color="inherit" component={RouterLink} to="/posts">
+            Posts
+         </Button>
          <Button color="inherit" component={RouterLink} to="/profiles">
             Profiles
          </Button>
