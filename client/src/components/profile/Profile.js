@@ -17,6 +17,7 @@ import ProfileTop from './ProfileTop';
 import ProfileAbout from './ProfileAbout';
 import ProfileExperience from './ProfileExperience';
 import ProfileEducation from './ProfileEducation';
+import ProfileGithub from './ProfileGithub';
 
 const useStyles = makeStyles((theme) => ({
    root: {
@@ -142,6 +143,11 @@ const Profile = ({
                         </div>
                      </Grid>
                   </Grid>
+                  <div>
+                     {profile.githubusername && (
+                        <ProfileGithub username={profile.githubusername} />
+                     )}
+                  </div>
                </React.Fragment>
             )}
          </React.Fragment>

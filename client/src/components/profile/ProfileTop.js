@@ -55,7 +55,9 @@ const ProfileTop = ({
             <Typography variant="body1">
                {status} {company && <span>at {company}</span>}
             </Typography>
-            <p>Seattle, WA</p>
+            <Typography variant="body1" paragraph>
+               {location}
+            </Typography>
             <div className={classes.icons}>
                {website && (
                   <a href={website}>

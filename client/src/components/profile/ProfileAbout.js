@@ -16,8 +16,10 @@ const useStyles = makeStyles((theme) => ({
       flexDirection: 'row',
       listStyleType: 'none',
       alignItems: 'center',
-      justifyContent: 'center',
+      justifyContent: 'space-around',
       textAlign: 'center',
+      flexWrap: 'wrap',
+      paddingInlineStart: '0',
    },
    bio: {
       marginTop: theme.spacing(2),
