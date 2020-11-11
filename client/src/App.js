@@ -16,6 +16,7 @@ import Landing from './components/layout/Landing';
 import Login from './components/auth/Login';
 import Navbar from './components/layout/Navbar';
 import PrivateRoute from './components/routing/PrivateRoute';
+import Profile from './components/profile/Profile';
 import Profiles from './components/profiles/Profiles';
 import Register from './components/auth/Register';
 
@@ -43,6 +44,7 @@ const App = () => {
                   <Switch>
                      <Route exact path="/register" component={Register} />
                      <Route exact path="/login" component={Login} />
+                     <Route exact path="/profile/:id" component={Profile} />
                      <Route exact path="/profiles" component={Profiles} />
                      <PrivateRoute
                         exact

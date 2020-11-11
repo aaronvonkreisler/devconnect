@@ -42,7 +42,7 @@ const ProfileItem = ({
    const classes = useStyles();
    return (
       <Card className={classes.card}>
-         <Grid container spacing={2} justify="start" alignItems="center">
+         <Grid container spacing={2} justify="flex-start" alignItems="center">
             <Grid item xs={12} sm={2}>
                <img src={avatar} alt="" className={classes.image} />
             </Grid>
