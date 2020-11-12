@@ -19,7 +19,7 @@ import ThumbUpIcon from '@material-ui/icons/ThumbUp';
 import ThumbDownIcon from '@material-ui/icons/ThumbDown';
 import DeleteIcon from '@material-ui/icons/Delete';
 import ChatIcon from '@material-ui/icons/Chat';
-import { addLike, removeLike } from '../../actions/post';
+import { addLike, removeLike, deletePost } from '../../actions/post';
 
 const useStyles = makeStyles((theme) => ({
    inline: {
@@ -44,6 +44,7 @@ const PostListItem = ({
    post: { _id, text, name, avatar, user, likes, comments, date },
    addLike,
    removeLike,
+   deletePost,
 }) => {
    const classes = useStyles();
    return (
@@ -94,7 +95,11 @@ const PostListItem = ({
             </Badge>
             {!auth.loading && user === auth.user._id && (
                <IconButton>
-                  <DeleteIcon color="secondary" fontSize="small" />
+                  <DeleteIcon
+                     color="secondary"
+                     fontSize="small"
+                     onClick={() => deletePost(_id)}
+                  />
                </IconButton>
             )}
          </div>
@@ -108,10 +113,13 @@ PostListItem.propTypes = {
    auth: PropTypes.object.isRequired,
    addLike: PropTypes.func.isRequired,
    removeLike: PropTypes.func.isRequired,
+   deletePost: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
    auth: state.auth,
 });
 
-export default connect(mapStateToProps, { addLike, removeLike })(PostListItem);
+export default connect(mapStateToProps, { addLike, removeLike, deletePost })(
+   PostListItem
+);
