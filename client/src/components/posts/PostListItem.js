@@ -7,7 +7,6 @@ import {
    ListItem,
    Badge,
    IconButton,
-   Divider,
    Typography,
    Avatar,
    ListItemAvatar,
@@ -22,16 +21,19 @@ import ChatIcon from '@material-ui/icons/Chat';
 import { addLike, removeLike, deletePost } from '../../actions/post';
 
 const useStyles = makeStyles((theme) => ({
+   root: {
+      border: '1px solid #EAEAED',
+   },
    inline: {
       display: 'inline',
    },
    toolbar: {
       display: 'flex',
       flexDirection: 'row',
-      alignItems: 'center',
+      alignItems: 'flex-end',
       justifyContent: 'space-evenly',
    },
-   divider: {
+   mt2: {
       marginTop: theme.spacing(2),
    },
    timeStamp: {
@@ -48,15 +50,18 @@ const PostListItem = ({
 }) => {
    const classes = useStyles();
    return (
-      <div>
+      <div className={classes.root}>
          <ListItem alignItems="flex-start">
-            <ListItemAvatar>
-               <Avatar alt={name} src={avatar} />
-            </ListItemAvatar>
+            <RouterLink to={`/profile/${user}`}>
+               <ListItemAvatar>
+                  <Avatar alt={name} src={avatar} />
+               </ListItemAvatar>
+            </RouterLink>
             <ListItemText
-               primary={name}
+               disableTypography
+               primary={<strong>{name}</strong>}
                secondary={
-                  <React.Fragment>
+                  <div className={classes.mt2}>
                      <Typography
                         component="span"
                         variant="body1"
@@ -72,7 +77,7 @@ const PostListItem = ({
                      >
                         Posted <Moment format="MM/DD/YYYY">{date}</Moment>
                      </Typography>
-                  </React.Fragment>
+                  </div>
                }
             />
          </ListItem>
@@ -94,16 +99,11 @@ const PostListItem = ({
                </IconButton>
             </Badge>
             {!auth.loading && user === auth.user._id && (
-               <IconButton>
-                  <DeleteIcon
-                     color="secondary"
-                     fontSize="small"
-                     onClick={() => deletePost(_id)}
-                  />
+               <IconButton onClick={() => deletePost(_id)}>
+                  <DeleteIcon color="secondary" fontSize="small" />
                </IconButton>
             )}
          </div>
-         <Divider className={classes.divider} />
       </div>
    );
 };
