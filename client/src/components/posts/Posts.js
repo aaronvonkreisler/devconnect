@@ -1,10 +1,12 @@
 import React, { useEffect } from 'react';
+import { HashLink } from 'react-router-hash-link';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import {
    Container,
    Typography,
    List,
+   ListSubheader,
    makeStyles,
    Grid,
 } from '@material-ui/core';
@@ -21,6 +23,12 @@ const useStyles = makeStyles((theme) => ({
    list: {
       width: '100%',
       maxWidth: '80ch',
+      backgroundColor: 'inherit',
+   },
+   header: {
+      backgroundColor: 'white',
+      minHeight: '2.5rem',
+      color: 'black',
    },
 }));
 
@@ -40,7 +48,14 @@ const Posts = ({ getPosts, post: { posts, loading } }) => {
             <Grid item xs={12} md={6}>
                <Typography variant="h2">Posts</Typography>
                <Typography variant="h5">Welcome to the community!</Typography>
-               <List className={classes.list}>
+               <List className={classes.list} subheader={<li />}>
+                  <ListSubheader className={classes.header}>
+                     <Typography variant="h6">
+                        <HashLink smooth to="/posts#top">
+                           <strong>HOME</strong>
+                        </HashLink>
+                     </Typography>
+                  </ListSubheader>
                   <PostForm />
                   {posts.map((post) => (
                      <PostListItem key={post._id} post={post} />

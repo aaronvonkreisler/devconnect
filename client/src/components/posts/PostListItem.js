@@ -47,6 +47,7 @@ const PostListItem = ({
    addLike,
    removeLike,
    deletePost,
+   showActions,
 }) => {
    const classes = useStyles();
    return (
@@ -81,31 +82,37 @@ const PostListItem = ({
                }
             />
          </ListItem>
-         <div className={classes.toolbar}>
-            {/* Like Icon */}
-            <Badge badgeContent={likes.length} color="secondary">
-               <IconButton onClick={() => addLike(_id)}>
-                  <ThumbUpIcon fontSize="small" />
+         {showActions && (
+            <div className={classes.toolbar}>
+               {/* Like Icon */}
+               <Badge badgeContent={likes.length} color="secondary">
+                  <IconButton onClick={() => addLike(_id)}>
+                     <ThumbUpIcon fontSize="small" />
+                  </IconButton>
+               </Badge>
+               {/* Unlike Icon */}
+               <IconButton onClick={() => removeLike(_id)}>
+                  <ThumbDownIcon fontSize="small" />
                </IconButton>
-            </Badge>
-            {/* Unlike Icon */}
-            <IconButton onClick={() => removeLike(_id)}>
-               <ThumbDownIcon fontSize="small" />
-            </IconButton>
-            {/* Comments Icon */}
-            <Badge badgeContent={comments.length} color="primary">
-               <IconButton component={RouterLink} to={`/post/${_id}`}>
-                  <ChatIcon fontSize="small" />
-               </IconButton>
-            </Badge>
-            {!auth.loading && user === auth.user._id && (
-               <IconButton onClick={() => deletePost(_id)}>
-                  <DeleteIcon color="secondary" fontSize="small" />
-               </IconButton>
-            )}
-         </div>
+               {/* Comments Icon */}
+               <Badge badgeContent={comments.length} color="primary">
+                  <IconButton component={RouterLink} to={`/posts/${_id}`}>
+                     <ChatIcon fontSize="small" />
+                  </IconButton>
+               </Badge>
+               {!auth.loading && user === auth.user._id && (
+                  <IconButton onClick={() => deletePost(_id)}>
+                     <DeleteIcon color="secondary" fontSize="small" />
+                  </IconButton>
+               )}
+            </div>
+         )}
       </div>
    );
+};
+
+PostListItem.defaultProps = {
+   showActions: true,
 };
 
 PostListItem.propTypes = {
