@@ -40,7 +40,7 @@ const PostForm = ({ addPost, loadUser, auth: { user, loading } }) => {
    const [text, setText] = useState('');
 
    return (
-      <div className={classes.root} id="top">
+      <div className={classes.root}>
          <ListItem alignItems="flex-start">
             <ListItemAvatar>
                {/* If avatar src triggers an error, the avatar defaults

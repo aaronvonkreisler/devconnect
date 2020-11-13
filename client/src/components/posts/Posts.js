@@ -45,29 +45,17 @@ const Posts = ({ getPosts, post: { posts, loading } }) => {
    return loading ? (
       <Spinner />
    ) : (
-      <Container className={classes.container}>
-         <Grid container>
-            <Grid item md={3}></Grid>
-            <Grid item xs={12} md={6}>
-               <Typography variant="h2">Posts</Typography>
-               <Typography variant="h5">Welcome to the community!</Typography>
-               <List className={classes.list} subheader={<li />}>
-                  <ListSubheader className={classes.header}>
-                     <Typography variant="h6" className={classes.mt2}>
-                        <HashLink smooth to="/posts#top">
-                           <strong>Posts</strong>
-                        </HashLink>
-                     </Typography>
-                  </ListSubheader>
-                  <PostForm />
-                  {posts.map((post) => (
-                     <PostListItem key={post._id} post={post} />
-                  ))}
-               </List>
-            </Grid>
-            <Grid item md={3}></Grid>
+      <Grid container>
+         <Grid item xs={12} md={9}>
+            <List className={classes.list} subheader={<li />}>
+               <PostForm />
+               {posts.map((post) => (
+                  <PostListItem key={post._id} post={post} />
+               ))}
+            </List>
          </Grid>
-      </Container>
+         <Grid item md={3}></Grid>
+      </Grid>
    );
 };
 

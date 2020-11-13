@@ -42,12 +42,10 @@ const CommentForm = ({
    addComment,
    modalOpen,
    setModalOpen,
-   user: { user },
+   auth: { user, loading },
 }) => {
    const classes = useStyles();
    const [text, setText] = useState('');
-   const userName = user.name.charAt(0);
-   const postsUserName = post.name.charAt(0);
 
    const handleClose = () => {
       setModalOpen(false);
@@ -64,10 +62,17 @@ const CommentForm = ({
          >
             <DialogTitle id="form-dialog-title">
                <div className={classes.flex}>
-                  <AvatarGroup>
-                     <Avatar className={classes.green}>{postsUserName}</Avatar>
-                     <Avatar className={classes.blue}>{userName}</Avatar>
-                  </AvatarGroup>
+                  {!loading && (
+                     <AvatarGroup>
+                        <Avatar className={classes.green}>
+                           {post.name.charAt(0)}
+                        </Avatar>
+                        <Avatar className={classes.blue}>
+                           {user.name.charAt(0)}
+                        </Avatar>
+                     </AvatarGroup>
+                  )}
+
                   <Typography variant="h5" className={classes.title}>
                      {`Replying to ${post.name}`}
                   </Typography>
@@ -114,4 +119,8 @@ CommentForm.propTypes = {
    post: PropTypes.object.isRequired,
 };
 
-export default connect(null, { addComment })(CommentForm);
+const mapStateToProps = (state) => ({
+   auth: state.auth,
+});
+
+export default connect(mapStateToProps, { addComment })(CommentForm);

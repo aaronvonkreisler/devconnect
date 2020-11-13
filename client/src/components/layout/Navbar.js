@@ -1,130 +1,71 @@
-import React, { useState } from 'react';
-import { connect } from 'react-redux';
-import { Link as RouterLink } from 'react-router-dom';
+import React from 'react';
+import { Link as RouterLink, useHistory } from 'react-router-dom';
+import { HashLink } from 'react-router-hash-link';
 import {
    AppBar,
    Toolbar,
-   Typography,
-   Button,
    IconButton,
-   Menu,
-   MenuItem,
+   Typography,
+   makeStyles,
 } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
-import AccountCircle from '@material-ui/icons/AccountCircle';
-import PropTypes from 'prop-types';
-import { logout } from '../../actions/auth';
+import MenuIcon from '@material-ui/icons/Menu';
+
+const drawerWidth = 280;
 
 const useStyles = makeStyles((theme) => ({
-   root: {
-      flexGrow: 1,
-      color: 'white',
+   appBar: {
+      [theme.breakpoints.up('sm')]: {
+         width: `calc(100% - ${drawerWidth}px)`,
+         marginLeft: drawerWidth,
+      },
    },
    menuButton: {
       marginRight: theme.spacing(2),
-   },
-   title: {
-      flexGrow: 1,
-      textDecoration: 'none',
-      color: 'white',
+      [theme.breakpoints.up('sm')]: {
+         display: 'none',
+      },
    },
 }));
 
-const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
+const Navbar = ({ handleDrawerToggle }) => {
+   let history = useHistory();
    const classes = useStyles();
-   const [anchorEl, setAnchorEl] = useState(null);
-   const open = Boolean(anchorEl);
 
-   const handleMenu = (e) => {
-      setAnchorEl(e.currentTarget);
-   };
-
-   const handleClose = () => {
-      setAnchorEl(null);
-   };
-
-   const authLinks = (
-      <React.Fragment>
-         <Button color="inherit" component={RouterLink} to="/dashboard">
-            Dashboard
-         </Button>
-         <Button color="inherit" component={RouterLink} to="/posts">
-            Posts
-         </Button>
-         <Button color="inherit" component={RouterLink} to="/profiles">
-            Profiles
-         </Button>
-         <Button color="inherit" onClick={logout}>
-            Logout
-         </Button>
-         <IconButton
-            aria-label="account of current user"
-            aria-controls="menu-appbar"
-            aria-haspopup="true"
-            onClick={handleMenu}
-            color="inherit"
-         >
-            <AccountCircle />
-         </IconButton>
-         <Menu
-            id="menu-appbar"
-            anchorEl={anchorEl}
-            anchorOrigin={{
-               vertical: 'top',
-               horizontal: 'right',
-            }}
-            keepMounted
-            transformOrigin={{
-               vertical: 'top',
-               horizontal: 'right',
-            }}
-            open={open}
-            onClose={handleClose}
-         >
-            <MenuItem onClick={handleClose}>Profile</MenuItem>
-            <MenuItem onClick={handleClose}>My account</MenuItem>
-         </Menu>
-      </React.Fragment>
-   );
-
-   const guestLinks = (
-      <React.Fragment>
-         <Button color="inherit" href="#!">
-            Developers
-         </Button>
-         <Button color="inherit" component={RouterLink} to="/register">
-            Register
-         </Button>
-
-         <Button
-            color="secondary"
-            variant="contained"
-            component={RouterLink}
-            to="/login"
-         >
-            Login
-         </Button>
-      </React.Fragment>
-   );
+   const { pathname } = history.location;
 
    return (
-      <div className={classes.root}>
-         <AppBar position="static">
+      <div id="top">
+         <AppBar
+            position="fixed"
+            className={classes.appBar}
+            color="inherit"
+            elevation={0}
+         >
             <Toolbar>
-               <Typography
-                  edge="start"
-                  variant="h6"
+               <IconButton
                   color="inherit"
-                  className={classes.title}
-                  component={RouterLink}
-                  to="/"
+                  aria-label="open sidebar"
+                  edge="start"
+                  onClick={handleDrawerToggle}
+                  className={classes.menuButton}
                >
-                  Dev Connect
-               </Typography>
-               {!loading && (
-                  <React.Fragment>
-                     {isAuthenticated ? authLinks : guestLinks}
-                  </React.Fragment>
+                  <MenuIcon />
+               </IconButton>
+               {pathname === '/posts' ? (
+                  <Typography variant="h6">
+                     <HashLink smooth to="/posts#top">
+                        Home
+                     </HashLink>
+                  </Typography>
+               ) : (
+                  <Typography
+                     variant="h6"
+                     noWrap
+                     component={RouterLink}
+                     to="/posts"
+                  >
+                     Home
+                  </Typography>
                )}
             </Toolbar>
          </AppBar>
@@ -132,13 +73,4 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
    );
 };
 
-Navbar.propTypes = {
-   logout: PropTypes.func.isRequired,
-   auth: PropTypes.object.isRequired,
-};
-
-const mapStateToProps = (state) => ({
-   auth: state.auth,
-});
-
-export default connect(mapStateToProps, { logout })(Navbar);
+export default Navbar;
