@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link as RouterLink } from 'react-router-dom';
+import { Link as RouterLink, useHistory } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Moment from 'react-moment';
 import PropTypes from 'prop-types';
@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
       display: 'flex',
       flexDirection: 'row',
       alignItems: 'flex-end',
-      justifyContent: 'space-evenly',
+      justifyContent: 'flex-start',
    },
    mt2: {
       marginTop: theme.spacing(2),
@@ -43,26 +43,35 @@ const useStyles = makeStyles((theme) => ({
 
 const PostListItem = ({
    auth,
-   post: { _id, text, name, avatar, user, likes, comments, date },
+   post: { _id, text, name, avatar, user, date },
    addLike,
    removeLike,
    deletePost,
    showActions,
+   button,
 }) => {
    const classes = useStyles();
+   let history = useHistory();
+
    return (
       <div className={classes.root}>
-         <ListItem alignItems="flex-start">
-            <RouterLink to={`/profile/${user}`}>
-               <ListItemAvatar>
-                  <Avatar alt={name} src={avatar} />
-               </ListItemAvatar>
-            </RouterLink>
+         <ListItem alignItems="flex-start" button={button}>
+            <ListItemAvatar>
+               <Avatar
+                  alt={name}
+                  src={avatar}
+                  component={RouterLink}
+                  to={`/profile/${user}`}
+               />
+            </ListItemAvatar>
             <ListItemText
                disableTypography
                primary={<strong>{name}</strong>}
                secondary={
-                  <div className={classes.mt2}>
+                  <div
+                     className={classes.mt2}
+                     onClick={() => history.push(`/posts/${_id}`)}
+                  >
                      <Typography
                         component="span"
                         variant="body1"
@@ -76,43 +85,50 @@ const PostListItem = ({
                         display="block"
                         className={classes.timeStamp}
                      >
-                        Posted <Moment format="MM/DD/YYYY">{date}</Moment>
+                        Posted <Moment fromNow>{date}</Moment>
                      </Typography>
+                     {showActions && (
+                        <div className={classes.toolbar}>
+                           {/* Like Icon */}
+
+                           <IconButton onClick={() => addLike(_id)}>
+                              <ThumbUpIcon fontSize="small" />
+                           </IconButton>
+
+                           {/* Unlike Icon */}
+                           <IconButton onClick={() => removeLike(_id)}>
+                              <ThumbDownIcon fontSize="small" />
+                           </IconButton>
+                           {/* Comments Icon */}
+
+                           <IconButton
+                              component={RouterLink}
+                              to={`/posts/${_id}`}
+                           >
+                              <ChatIcon fontSize="small" />
+                           </IconButton>
+
+                           {!auth.loading && user === auth.user._id && (
+                              <IconButton onClick={() => deletePost(_id)}>
+                                 <DeleteIcon
+                                    color="secondary"
+                                    fontSize="small"
+                                 />
+                              </IconButton>
+                           )}
+                        </div>
+                     )}
                   </div>
                }
             />
          </ListItem>
-         {showActions && (
-            <div className={classes.toolbar}>
-               {/* Like Icon */}
-               <Badge badgeContent={likes.length} color="secondary">
-                  <IconButton onClick={() => addLike(_id)}>
-                     <ThumbUpIcon fontSize="small" />
-                  </IconButton>
-               </Badge>
-               {/* Unlike Icon */}
-               <IconButton onClick={() => removeLike(_id)}>
-                  <ThumbDownIcon fontSize="small" />
-               </IconButton>
-               {/* Comments Icon */}
-               <Badge badgeContent={comments.length} color="primary">
-                  <IconButton component={RouterLink} to={`/posts/${_id}`}>
-                     <ChatIcon fontSize="small" />
-                  </IconButton>
-               </Badge>
-               {!auth.loading && user === auth.user._id && (
-                  <IconButton onClick={() => deletePost(_id)}>
-                     <DeleteIcon color="secondary" fontSize="small" />
-                  </IconButton>
-               )}
-            </div>
-         )}
       </div>
    );
 };
 
 PostListItem.defaultProps = {
    showActions: true,
+   button: true,
 };
 
 PostListItem.propTypes = {

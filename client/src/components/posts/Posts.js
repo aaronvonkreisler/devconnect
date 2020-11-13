@@ -30,6 +30,9 @@ const useStyles = makeStyles((theme) => ({
       minHeight: '2.5rem',
       color: 'black',
    },
+   mt2: {
+      marginTop: theme.spacing(2),
+   },
 }));
 
 const Posts = ({ getPosts, post: { posts, loading } }) => {
@@ -50,9 +53,9 @@ const Posts = ({ getPosts, post: { posts, loading } }) => {
                <Typography variant="h5">Welcome to the community!</Typography>
                <List className={classes.list} subheader={<li />}>
                   <ListSubheader className={classes.header}>
-                     <Typography variant="h6">
+                     <Typography variant="h6" className={classes.mt2}>
                         <HashLink smooth to="/posts#top">
-                           <strong>HOME</strong>
+                           <strong>Posts</strong>
                         </HashLink>
                      </Typography>
                   </ListSubheader>
