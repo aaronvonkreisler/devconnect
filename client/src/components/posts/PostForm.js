@@ -30,8 +30,7 @@ const useStyles = makeStyles((theme) => ({
    toolbar: {
       display: 'flex',
       flexDirection: 'row-reverse',
-      marginTop: theme.spacing(1),
-      marginBottom: theme.spacing(1),
+      margin: theme.spacing(1),
    },
 }));
 

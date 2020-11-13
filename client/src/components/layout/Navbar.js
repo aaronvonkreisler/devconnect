@@ -54,7 +54,7 @@ const Navbar = ({ handleDrawerToggle }) => {
                {pathname === '/posts' ? (
                   <Typography variant="h6">
                      <HashLink smooth to="/posts#top">
-                        Home
+                        <strong>Home</strong>
                      </HashLink>
                   </Typography>
                ) : (

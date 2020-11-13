@@ -109,7 +109,10 @@ const Navigation = ({ children, auth: { user, loading }, logout }) => {
                      key={index}
                   >
                      <ListItemIcon>{item.icon}</ListItemIcon>
-                     <ListItemText primary={item.text} />
+                     <ListItemText
+                        primary={item.text}
+                        primaryTypographyProps={{ variant: 'h6' }}
+                     />
                   </ListItem>
                ))}
             <Divider />
@@ -117,7 +120,10 @@ const Navigation = ({ children, auth: { user, loading }, logout }) => {
                <ListItemIcon>
                   <AccountCircleOutlinedIcon />
                </ListItemIcon>
-               <ListItemText primary="Logout" />
+               <ListItemText
+                  primary="Logout"
+                  primaryTypographyProps={{ variant: 'h6' }}
+               />
             </ListItem>
          </List>
       </div>
