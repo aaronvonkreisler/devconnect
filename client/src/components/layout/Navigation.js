@@ -166,16 +166,6 @@ const Navigation = ({ children, auth: { user, loading }, logout }) => {
             <div className={classes.toolbar} />
             {children}
          </main>
-         <Hidden smDown implementation="css">
-            <Drawer
-               className={classes.drawer}
-               variant="permanent"
-               classes={{
-                  paper: classes.drawerPaper,
-               }}
-               anchor="right"
-            ></Drawer>
-         </Hidden>
       </div>
    );
 };

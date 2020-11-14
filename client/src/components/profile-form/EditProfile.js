@@ -47,6 +47,7 @@ const useStyles = makeStyles((theme) => ({
 
 const EditProfile = ({
    profile: { profile, loading },
+   auth: { user },
    createProfile,
    history,
    getCurrentProfile,
@@ -211,11 +212,11 @@ const EditProfile = ({
                         <TextField
                            fullWidth
                            type="text"
-                           label="* Skills"
+                           label="Tech Stack"
                            name="skills"
                            variant="outlined"
                            helperText="Please use comma separated values e.g.
-                        HTML,CSS,JavaScript,Python"
+                              Node.js, React, MongoDB,"
                            value={skills}
                            onChange={(e) => onChange(e)}
                         />
@@ -370,13 +371,15 @@ const EditProfile = ({
                      <Button type="submit" color="primary" variant="contained">
                         Save Changes
                      </Button>
-                     <Button
-                        component={RouterLink}
-                        to="/dashboard"
-                        variant="contained"
-                     >
-                        Go Back
-                     </Button>
+                     {!loading && (
+                        <Button
+                           component={RouterLink}
+                           to={`/profile/${user._id}`}
+                           variant="contained"
+                        >
+                           Go Back
+                        </Button>
+                     )}
                   </form>
                </Container>
             </Card>
@@ -389,10 +392,12 @@ EditProfile.propTypes = {
    createProfile: PropTypes.func.isRequired,
    getCurrentProfile: PropTypes.func.isRequired,
    profile: PropTypes.object.isRequired,
+   auth: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = (state) => ({
    profile: state.profile,
+   auth: state.auth,
 });
 
 export default connect(mapStateToProps, { createProfile, getCurrentProfile })(

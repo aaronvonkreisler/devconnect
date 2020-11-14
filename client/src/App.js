@@ -18,7 +18,7 @@ import Navigation from './components/layout/Navigation';
 import PrivateRoute from './components/routing/PrivateRoute';
 import Post from './components/post/Post';
 import Posts from './components/posts/Posts';
-import Profile from './components/profile/Profile';
+import Profile from './components/profilev2/Profile';
 import Profiles from './components/profiles/Profiles';
 import Register from './components/auth/Register';
 
