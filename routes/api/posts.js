@@ -247,4 +247,23 @@ router.delete('/comment/:post_id/:comment_id', auth, async (req, res) => {
    }
 });
 
+// @route       GET api/posts/user/:user_id
+// @desc        Get all posts for a user
+// @access      Private
+router.get('/user/:user_id', auth, async (req, res) => {
+   try {
+      const userPosts = await Post.find({ user: req.params.user_id });
+      if (!userPosts) {
+         return res.status(404).json({ msg: 'No posts found for this user' });
+      }
+      res.json(userPosts);
+   } catch (err) {
+      console.error(err);
+      if (err.kind === 'ObjectId') {
+         return res.status(404).json({ msg: 'No posts found for this user!' });
+      }
+      res.status(500).send('Server Error');
+   }
+});
+
 module.exports = router;
