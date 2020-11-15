@@ -1,6 +1,7 @@
 import {
    GET_PROFILE,
    GET_PROFILES,
+   GET_USER_POSTS,
    GET_REPOS,
    PROFILE_ERROR,
    CLEAR_PROFILE,
@@ -12,6 +13,7 @@ const initialState = {
    profiles: [],
    repos: [],
    loading: true,
+   posts: [],
    error: {},
 };
 
@@ -51,6 +53,12 @@ export default (state = initialState, action) => {
          return {
             ...state,
             repos: payload,
+            loading: false,
+         };
+      case GET_USER_POSTS:
+         return {
+            ...state,
+            posts: payload,
             loading: false,
          };
       default:
