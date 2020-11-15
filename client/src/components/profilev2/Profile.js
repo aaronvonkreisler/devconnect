@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { Grid, Typography, makeStyles, Card } from '@material-ui/core';
+import { Grid, makeStyles } from '@material-ui/core';
 import { getProfileById } from '../../actions/profile';
 import Spinner from '../layout/Spinner';
 import UserCard from './UserCard';

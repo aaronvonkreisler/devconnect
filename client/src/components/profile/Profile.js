@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
-import { useHistory, Redirect } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { getProfileById } from '../../actions/profile';
-import { Hidden, Card, Grid, makeStyles, Typography } from '@material-ui/core';
+import { Card, Grid, makeStyles, Typography } from '@material-ui/core';
 import Alert from '@material-ui/lab/Alert';
 import Spinner from '../layout/Spinner';
 import ProfileTop from './ProfileTop';
@@ -38,7 +38,6 @@ const Profile = ({
    profile: { profile, loading },
    auth,
 }) => {
-   let history = useHistory();
    const classes = useStyles();
 
    useEffect(() => {
