@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Link as RouterLink } from 'react-router-dom';
+import { useHistory, Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { getProfileById } from '../../actions/profile';
@@ -38,6 +38,7 @@ const Profile = ({
    profile: { profile, loading },
    auth,
 }) => {
+   let history = useHistory();
    const classes = useStyles();
 
    useEffect(() => {
