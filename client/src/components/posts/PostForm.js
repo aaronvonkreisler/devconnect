@@ -44,14 +44,14 @@ const PostForm = ({ addPost, loadUser, auth: { user, loading } }) => {
             <ListItemAvatar>
                {/* If avatar src triggers an error, the avatar defaults
                 * to the first letter of the Alt tag*/}
-               {loading ? (
-                  <Avatar className={classes.blue} />
-               ) : (
+               {!loading && user ? (
                   <Avatar
                      className={classes.blue}
                      alt={user.name}
                      src="asdfg"
                   />
+               ) : (
+                  <Avatar className={classes.blue} />
                )}
             </ListItemAvatar>
 
