@@ -5,7 +5,6 @@ import Moment from 'react-moment';
 import PropTypes from 'prop-types';
 import {
    ListItem,
-   Badge,
    IconButton,
    Typography,
    Avatar,
@@ -68,15 +67,14 @@ const PostListItem = ({
                disableTypography
                primary={<strong>{name}</strong>}
                secondary={
-                  <div
-                     className={classes.mt2}
-                     onClick={() => history.push(`/posts/${_id}`)}
-                  >
+                  <div className={classes.mt2}>
                      <Typography
                         component="span"
+                        display="block"
                         variant="body1"
                         className={classes.inline}
                         color="textPrimary"
+                        onClick={() => history.push(`/posts/${_id}`)}
                      >
                         {text}
                      </Typography>
@@ -85,7 +83,7 @@ const PostListItem = ({
                         display="block"
                         className={classes.timeStamp}
                      >
-                        Posted <Moment fromNow>{date}</Moment>
+                        <Moment fromNow>{date}</Moment>
                      </Typography>
                      {showActions && (
                         <div className={classes.toolbar}>
