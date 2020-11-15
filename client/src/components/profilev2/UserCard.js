@@ -70,7 +70,7 @@ const UserCard = ({
 }) => {
    const classes = useStyles();
    return (
-      <Card className={classes.root}>
+      <Card className={classes.root} variant="outlined">
          <div className={classes.cardTop}>
             <div>
                <img src={avatar} alt={name} className={classes.avatar} />
