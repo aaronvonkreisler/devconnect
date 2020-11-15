@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles, AppBar, Box, Tabs, Tab } from '@material-ui/core';
+import UserPosts from './UserPosts';
 
 const TabPanel = (props) => {
    const { children, value, index, ...other } = props;
@@ -65,7 +66,7 @@ const ProfileTabs = () => {
             </Tabs>
          </AppBar>
          <TabPanel value={value} index={0}>
-            Item One
+            <UserPosts />
          </TabPanel>
          <TabPanel value={value} index={1}>
             Item Two

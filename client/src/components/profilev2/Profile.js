@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Grid, makeStyles } from '@material-ui/core';
 import { getProfileById } from '../../actions/profile';
+import { getUsersPosts } from '../../actions/selectedUser.js';
 import Spinner from '../layout/Spinner';
 import UserCard from './UserCard';
 import ProfileTabs from './views/ProfileTabs';
@@ -20,6 +21,7 @@ const useStyles = makeStyles((theme) => ({
 const Profile = ({
    match,
    getProfileById,
+   getUsersPosts,
    profile: { profile, loading },
    auth: { user },
    history,
@@ -28,7 +30,12 @@ const Profile = ({
 
    useEffect(() => {
       getProfileById(match.params.id, history);
-   }, [getProfileById, match.params.id, history]);
+      getUsersPosts(match.params.id);
+   }, [getProfileById, match.params.id, history, getUsersPosts]);
+
+   // useEffect(() => {
+   //    getUsersPosts(match.params.id);
+   // }, [getUsersPosts, match.params.id]);
 
    return (
       <React.Fragment>
@@ -46,7 +53,11 @@ const Profile = ({
                      xl={3}
                      className={classes.card}
                   >
-                     <UserCard profile={profile} user={user} />
+                     <UserCard
+                        profile={profile}
+                        user={user}
+                        loading={loading}
+                     />
                   </Grid>
                   <Grid
                      item
@@ -68,6 +79,7 @@ const Profile = ({
 
 Profile.propTypes = {
    getProfileById: PropTypes.func.isRequired,
+   getUsersPosts: PropTypes.func.isRequired,
    auth: PropTypes.object.isRequired,
    profile: PropTypes.object.isRequired,
 };
@@ -77,6 +89,6 @@ const mapStateToProps = (state) => ({
    profile: state.profile,
 });
 
-export default connect(mapStateToProps, { getProfileById })(
+export default connect(mapStateToProps, { getProfileById, getUsersPosts })(
    withRouter(Profile)
 );
