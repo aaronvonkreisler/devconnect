@@ -5,24 +5,17 @@ import { logout } from '../../actions/auth';
 import Navbar from './Navbar';
 import PropTypes from 'prop-types';
 import {
-   AppBar,
    CssBaseline,
    Divider,
    Drawer,
    Hidden,
-   IconButton,
-   Button,
    List,
    ListItem,
    ListItemIcon,
    ListItemText,
-   ListItemAvatar,
-   Avatar,
-   Toolbar,
-   Typography,
 } from '@material-ui/core';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
-import MenuIcon from '@material-ui/icons/Menu';
+
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import HomeIcon from '@material-ui/icons/Home';
 import TrendingUpIcon from '@material-ui/icons/TrendingUp';
@@ -36,20 +29,20 @@ const useStyles = makeStyles((theme) => ({
       display: 'flex',
    },
    drawer: {
-      [theme.breakpoints.up('sm')]: {
+      [theme.breakpoints.up('md')]: {
          width: drawerWidth,
          flexShrink: 0,
       },
    },
    appBar: {
-      [theme.breakpoints.up('sm')]: {
+      [theme.breakpoints.up('md')]: {
          width: `calc(100% - ${drawerWidth}px)`,
          marginLeft: drawerWidth,
       },
    },
    menuButton: {
       marginRight: theme.spacing(2),
-      [theme.breakpoints.up('sm')]: {
+      [theme.breakpoints.up('md')]: {
          display: 'none',
       },
    },
@@ -92,7 +85,7 @@ const Navigation = ({ children, auth: { user, loading }, logout }) => {
       {
          text: 'Profile',
          icon: <PersonOutlineIcon />,
-         path: !loading ? `/profile/${user._id}` : null,
+         path: !loading && user ? `/profile/${user._id}` : null,
       },
    ];
 
@@ -134,7 +127,7 @@ const Navigation = ({ children, auth: { user, loading }, logout }) => {
          <CssBaseline />
          <Navbar handleDrawerToggle={handleDrawerToggle} />
          <nav className={classes.drawer} aria-label="app navigation">
-            <Hidden smUp implementation="css">
+            <Hidden mdUp implementation="css">
                <Drawer
                   variant="temporary"
                   anchor={theme.direction === 'rtl' ? 'right' : 'left'}
@@ -150,13 +143,13 @@ const Navigation = ({ children, auth: { user, loading }, logout }) => {
                   {sidebar}
                </Drawer>
             </Hidden>
-            <Hidden xsDown implementation="css">
+            <Hidden smDown implementation="css">
                <Drawer
                   classes={{
                      paper: classes.drawerPaper,
                   }}
                   variant="permanent"
-                  open
+                  open={mobileOpen}
                >
                   {sidebar}
                </Drawer>
