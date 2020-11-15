@@ -22,7 +22,7 @@ import TrendingUpIcon from '@material-ui/icons/TrendingUp';
 import PersonOutlineIcon from '@material-ui/icons/PersonOutline';
 import AccountCircleOutlinedIcon from '@material-ui/icons/AccountCircleOutlined';
 
-const drawerWidth = 280;
+const drawerWidth = 250;
 
 const useStyles = makeStyles((theme) => ({
    root: {

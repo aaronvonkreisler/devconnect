@@ -10,7 +10,7 @@ import {
 } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 
-const drawerWidth = 280;
+const drawerWidth = 250;
 
 const useStyles = makeStyles((theme) => ({
    appBar: {
