@@ -1,6 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Card, makeStyles, Divider, Typography, Chip } from '@material-ui/core';
+import {
+   Card,
+   makeStyles,
+   Divider,
+   Typography,
+   Chip,
+   Button,
+} from '@material-ui/core';
 import FacebookIcon from '@material-ui/icons/Facebook';
 import InstagramIcon from '@material-ui/icons/Instagram';
 import LinkedInIcon from '@material-ui/icons/LinkedIn';
@@ -21,6 +28,9 @@ const useStyles = makeStyles((theme) => ({
    avatar: {
       borderRadius: '50%',
       width: '100px',
+   },
+   follow: {
+      marginTop: theme.spacing(0.5),
    },
    about: {
       textAlign: 'left',
@@ -60,6 +70,7 @@ const UserCard = ({
    profile: {
       bio,
       company,
+      education,
       location,
       skills,
       social,
@@ -81,13 +92,18 @@ const UserCard = ({
                   <div>
                      <img src={avatar} alt={name} className={classes.avatar} />
                   </div>
-                  <div>
-                     <Typography variant="h6">{name}</Typography>
-                     {status && company && (
-                        <Typography variant="caption">
-                           {status} at {company}
-                        </Typography>
-                     )}
+
+                  <Typography variant="h6">{name}</Typography>
+                  {status && company && (
+                     <Typography variant="caption">
+                        {status} at {company}
+                     </Typography>
+                  )}
+                  <div className={classes.follow}>
+                     {/* Will need to implement conditional button to render a button if the person is not following them */}
+                     <Button variant="outlined" size="small" color="primary">
+                        Follow
+                     </Button>
                   </div>
                   <div className={classes.metrics}>
                      <div>
@@ -109,6 +125,24 @@ const UserCard = ({
                         <div className={classes.about}>
                            <Typography variant="caption">Bio:</Typography>
                            <Typography variant="body2">{bio}</Typography>
+                        </div>
+                     )}
+                     {education && (
+                        <div className={classes.about}>
+                           <Typography variant="caption">Education:</Typography>
+                           {education.map((edu) => (
+                              <div key={edu._id}>
+                                 <Typography variant="body2">
+                                    {edu.school}
+                                 </Typography>
+                                 <Typography variant="body2">
+                                    {edu.degree}
+                                 </Typography>
+                                 <Typography variant="body2">
+                                    {edu.fieldofstudy}
+                                 </Typography>
+                              </div>
+                           ))}
                         </div>
                      )}
                      {location && (

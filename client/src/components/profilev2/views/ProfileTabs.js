@@ -13,7 +13,7 @@ const TabPanel = (props) => {
          aria-labelledby={`profile-tab-${index}`}
          {...other}
       >
-         {value === index && <Box p={3}>{children}</Box>}
+         {value === index && <Box>{children}</Box>}
       </div>
    );
 };
@@ -61,8 +61,8 @@ const ProfileTabs = () => {
                textColor="primary"
             >
                <Tab label="Posts" {...a11yProps(0)} />
-               <Tab label="Likes" {...a11yProps(1)} />
-               <Tab label="Friends" {...a11yProps(2)} />
+               <Tab label="Experience" {...a11yProps(1)} />
+               <Tab label="Likes" {...a11yProps(2)} />
             </Tabs>
          </AppBar>
          <TabPanel value={value} index={0}>
