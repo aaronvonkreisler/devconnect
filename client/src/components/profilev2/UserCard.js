@@ -70,7 +70,7 @@ const UserCard = ({
    profile: {
       bio,
       company,
-      education,
+
       location,
       skills,
       social,
@@ -128,24 +128,7 @@ const UserCard = ({
                            <Typography variant="body2">{bio}</Typography>
                         </div>
                      )}
-                     {education && (
-                        <div className={classes.about}>
-                           <Typography variant="caption">Education:</Typography>
-                           {education.map((edu) => (
-                              <div key={edu._id}>
-                                 <Typography variant="body2">
-                                    {edu.school}
-                                 </Typography>
-                                 <Typography variant="body2">
-                                    {edu.degree}
-                                 </Typography>
-                                 <Typography variant="body2">
-                                    {edu.fieldofstudy}
-                                 </Typography>
-                              </div>
-                           ))}
-                        </div>
-                     )}
+
                      {location && (
                         <div className={classes.about}>
                            <Typography variant="caption">Location:</Typography>
