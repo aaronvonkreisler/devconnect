@@ -1,11 +1,10 @@
-import React, { useEffect } from 'react';
-import { connect } from 'react-redux';
+import React from 'react';
 import LinearLoading from '../../layout/LinearLoading';
 import PostListItem from '../../posts/PostListItem';
 
 import PropTypes from 'prop-types';
 
-const UserPosts = ({ selectedUser: { posts, loading } }) => {
+const UserPosts = ({ posts, loading }) => {
    return (
       <React.Fragment>
          {loading ? (
@@ -26,8 +25,9 @@ const UserPosts = ({ selectedUser: { posts, loading } }) => {
    );
 };
 
-const mapStateToProps = (state) => ({
-   selectedUser: state.selectedUser,
-});
+UserPosts.propTypes = {
+   posts: PropTypes.array.isRequired,
+   loading: PropTypes.bool.isRequired,
+};
 
-export default connect(mapStateToProps)(UserPosts);
+export default UserPosts;
