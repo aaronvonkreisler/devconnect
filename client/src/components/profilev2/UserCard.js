@@ -79,6 +79,7 @@ const UserCard = ({
       githubusername,
       user: { name, avatar },
    },
+   posts,
    loading,
 }) => {
    const classes = useStyles();
@@ -116,7 +117,7 @@ const UserCard = ({
                      </div>
                      <div>
                         <p>Posts</p>
-                        <p>1200000</p>
+                        <p>{posts ? posts.length : 0}</p>
                      </div>
                   </div>
                   <Divider variant="middle" />

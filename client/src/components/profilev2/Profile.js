@@ -24,6 +24,7 @@ const Profile = ({
    getUsersPosts,
    profile: { profile, loading },
    auth: { user },
+   selectedUser: { posts },
    history,
 }) => {
    const classes = useStyles();
@@ -32,10 +33,6 @@ const Profile = ({
       getProfileById(match.params.id, history);
       getUsersPosts(match.params.id);
    }, [getProfileById, match.params.id, history, getUsersPosts]);
-
-   // useEffect(() => {
-   //    getUsersPosts(match.params.id);
-   // }, [getUsersPosts, match.params.id]);
 
    return (
       <React.Fragment>
@@ -57,6 +54,7 @@ const Profile = ({
                         profile={profile}
                         user={user}
                         loading={loading}
+                        posts={posts}
                      />
                   </Grid>
                   <Grid
@@ -87,6 +85,7 @@ Profile.propTypes = {
 const mapStateToProps = (state) => ({
    auth: state.auth,
    profile: state.profile,
+   selectedUser: state.selectedUser,
 });
 
 export default connect(mapStateToProps, { getProfileById, getUsersPosts })(
