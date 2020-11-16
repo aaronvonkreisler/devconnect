@@ -74,7 +74,6 @@ const PostListItem = ({
                         variant="body1"
                         className={classes.inline}
                         color="textPrimary"
-                        onClick={() => history.push(`/posts/${_id}`)}
                      >
                         {text}
                      </Typography>
