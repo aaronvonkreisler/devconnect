@@ -252,7 +252,9 @@ router.delete('/comment/:post_id/:comment_id', auth, async (req, res) => {
 // @access      Private
 router.get('/user/:user_id', auth, async (req, res) => {
    try {
-      const userPosts = await Post.find({ user: req.params.user_id });
+      const userPosts = await Post.find({ user: req.params.user_id }).sort({
+         date: -1,
+      });
       if (!userPosts) {
          return res.status(404).json({ msg: 'No posts found for this user' });
       }
