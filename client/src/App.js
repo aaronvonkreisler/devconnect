@@ -24,6 +24,7 @@ import Register from './components/auth/Register';
 
 import { loadUser } from './actions/auth';
 import setAuthToken from './utils/setAuthToken';
+import { LOGOUT } from './actions/types';
 
 if (localStorage.token) {
    setAuthToken(localStorage.token);
@@ -32,6 +33,12 @@ if (localStorage.token) {
 const App = () => {
    useEffect(() => {
       store.dispatch(loadUser());
+      // log out user from all tabs if tey logged out in one tab or token expires
+      window.addEventListener('storage', () => {
+         if (!localStorage.token) {
+            store.dispatch({ type: LOGOUT });
+         }
+      });
    }, []);
 
    return (
