@@ -1,7 +1,12 @@
-import React, { useState } from 'react';
-import { Link as RouterLink, useHistory } from 'react-router-dom';
-import { convertFromRaw, EditorState } from 'draft-js';
+import React from 'react';
+import { Link as RouterLink } from 'react-router-dom';
+import { convertFromRaw, EditorState, CompositeDecorator } from 'draft-js';
+import MultiDecorator from 'draft-js-plugins-editor/lib/Editor/MultiDecorator';
 import ViewOnlyEditor from '../text-editor/ViewOnlyEditor';
+import omit from 'lodash/omit';
+import createLinkifyPlugin from 'draft-js-linkify-plugin';
+import 'draft-js-linkify-plugin/lib/plugin.css';
+
 import { connect } from 'react-redux';
 import Moment from 'react-moment';
 import PropTypes from 'prop-types';
@@ -42,12 +47,43 @@ const useStyles = makeStyles((theme) => ({
       marginTop: theme.spacing(0.5),
    },
 }));
+// ------------- Functions for the view only Editor -----------
+const linkifyPlugin = createLinkifyPlugin({
+   target: '_blank',
+   // eslint-disable-next-line jsx-a11y/anchor-has-content
+   component: (params) => <a {...omit(params, ['blockKey'])} />,
+});
+
+const viewOnlyPlugins = [linkifyPlugin];
+
+const getPluginDecoratorArray = () => {
+   let decorators = [];
+   let plugin;
+   // check each plugin that will be used in the editor for decorators
+   // (retrieve listOfPlugins however makes sense in your code)
+   for (plugin of viewOnlyPlugins) {
+      if (plugin.decorators !== null && plugin.decorators !== undefined) {
+         // if the plugin has any decorators, add them to a list of all decorators from all plugins
+         decorators = decorators.concat(plugin.decorators);
+      }
+   }
+   return decorators;
+};
+
+const grabAllPluginDecorators = () => {
+   return new MultiDecorator([
+      new CompositeDecorator(getPluginDecoratorArray()),
+   ]);
+};
 
 const convertToEditorState = (editorContent) => {
+   let decorator = grabAllPluginDecorators();
    const content = convertFromRaw(JSON.parse(editorContent));
-   const newEditorState = EditorState.createWithContent(content);
+   const newEditorState = EditorState.createWithContent(content, decorator);
    return newEditorState;
 };
+
+// ------------------------------------------------------------------
 
 const PostListItem = ({
    auth,
@@ -86,6 +122,7 @@ const PostListItem = ({
                         {content && (
                            <ViewOnlyEditor
                               editorState={convertToEditorState(content)}
+                              plugins={viewOnlyPlugins}
                            />
                         )}
                      </Box>

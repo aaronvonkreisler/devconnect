@@ -30,7 +30,7 @@ const Posts = ({ getPosts, post: { posts, loading } }) => {
          <List className={classes.list} subheader={<li />}>
             <PostEditor />
             {posts.map((post) => (
-               <PostListItem key={post._id} post={post} />
+               <PostListItem key={post._id} post={post} button={false} />
             ))}
          </List>
       </div>
