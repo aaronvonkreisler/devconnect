@@ -4,9 +4,10 @@ import { connect } from 'react-redux';
 import { List, makeStyles } from '@material-ui/core';
 import { getPosts } from '../../actions/post';
 
-import PostForm from './PostForm';
 import PostListItem from './PostListItem';
 import Spinner from '../layout/Spinner';
+
+import PostEditor from './PostEditor';
 
 const useStyles = makeStyles((theme) => ({
    list: {
@@ -27,7 +28,7 @@ const Posts = ({ getPosts, post: { posts, loading } }) => {
    ) : (
       <div>
          <List className={classes.list} subheader={<li />}>
-            <PostForm />
+            <PostEditor />
             {posts.map((post) => (
                <PostListItem key={post._id} post={post} />
             ))}

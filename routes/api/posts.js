@@ -13,7 +13,11 @@ router.post(
    '/',
    [
       auth,
-      [check('text', 'Please enter some text to make a post').not().isEmpty()],
+      [
+         check('content', 'Please enter some text to make a post')
+            .not()
+            .isEmpty(),
+      ],
    ],
    async (req, res) => {
       const errors = validationResult(req);
@@ -27,6 +31,7 @@ router.post(
 
          const newPost = new Post({
             text: req.body.text,
+            content: req.body.content,
             name: user.name,
             avatar: user.avatar,
             user: req.user.id,

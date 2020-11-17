@@ -1,10 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link as RouterLink, useHistory } from 'react-router-dom';
+import { convertFromRaw, EditorState } from 'draft-js';
+import ViewOnlyEditor from '../text-editor/ViewOnlyEditor';
 import { connect } from 'react-redux';
 import Moment from 'react-moment';
 import PropTypes from 'prop-types';
 import {
    ListItem,
+   Box,
    IconButton,
    Typography,
    Avatar,
@@ -40,9 +43,15 @@ const useStyles = makeStyles((theme) => ({
    },
 }));
 
+const convertToEditorState = (editorContent) => {
+   const content = convertFromRaw(JSON.parse(editorContent));
+   const newEditorState = EditorState.createWithContent(content);
+   return newEditorState;
+};
+
 const PostListItem = ({
    auth,
-   post: { _id, text, name, avatar, user, date },
+   post: { _id, text, name, avatar, user, date, content },
    addLike,
    removeLike,
    deletePost,
@@ -50,7 +59,6 @@ const PostListItem = ({
    button,
 }) => {
    const classes = useStyles();
-   let history = useHistory();
 
    return (
       <div className={classes.root}>
@@ -68,15 +76,19 @@ const PostListItem = ({
                primary={<strong>{name}</strong>}
                secondary={
                   <div className={classes.mt2}>
-                     <Typography
+                     <Box
                         component="span"
                         display="block"
                         variant="body1"
                         className={classes.inline}
                         color="textPrimary"
                      >
-                        {text}
-                     </Typography>
+                        {content && (
+                           <ViewOnlyEditor
+                              editorState={convertToEditorState(content)}
+                           />
+                        )}
+                     </Box>
                      <Typography
                         variant="caption"
                         display="block"
