@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
+import { EditorState, convertToRaw, convertFromRaw } from 'draft-js';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { addPost } from '../../actions/post';
+import RichTextEditor from '../text-editor/RichTextEditor';
 import {
    Button,
    TextField,
@@ -37,6 +39,14 @@ const useStyles = makeStyles((theme) => ({
 const PostForm = ({ addPost, loadUser, auth: { user, loading } }) => {
    const classes = useStyles();
    const [text, setText] = useState('');
+   const [editorState, setEditorState] = useState(() =>
+      EditorState.createEmpty()
+   );
+
+   const onButtonClick = () => {
+      const contentState = editorState.getCurrentContent();
+      console.log(convertToRaw(contentState));
+   };
 
    return (
       <div className={classes.root}>
@@ -55,13 +65,17 @@ const PostForm = ({ addPost, loadUser, auth: { user, loading } }) => {
                )}
             </ListItemAvatar>
 
-            <TextField
+            {/*  <TextField
                fullWidth
-               multiline
-               name="text"
-               label="What's happening?"
-               value={text}
-               onChange={(e) => setText(e.target.value)}
+                multiline
+                name="text"
+                label="What's happening?"
+                value={text}
+                onChange={(e) => setText(e.target.value)}
+            /> */}
+            <RichTextEditor
+               editorState={editorState}
+               onChange={setEditorState}
             />
          </ListItem>
 
@@ -71,10 +85,7 @@ const PostForm = ({ addPost, loadUser, auth: { user, loading } }) => {
                variant="contained"
                color="primary"
                value="Submit"
-               onClick={() => {
-                  addPost({ text });
-                  setText('');
-               }}
+               onClick={() => onButtonClick()}
             >
                Share
             </Button>
@@ -82,6 +93,11 @@ const PostForm = ({ addPost, loadUser, auth: { user, loading } }) => {
       </div>
    );
 };
+
+/*onClick={() => {
+                  addPost({ text });
+                  setText('');
+               }}*/
 
 PostForm.propTypes = {
    addPost: PropTypes.func.isRequired,
