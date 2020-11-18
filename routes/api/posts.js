@@ -136,7 +136,7 @@ router.put('/like/:id', auth, async (req, res) => {
       res.json(post.likes);
    } catch (err) {
       console.error(err);
-      res.status(500).send('Server Errot');
+      res.status(500).send('Server Error');
    }
 });
 
@@ -269,6 +269,27 @@ router.get('/user/:user_id', auth, async (req, res) => {
       if (err.kind === 'ObjectId') {
          return res.status(404).json({ msg: 'No posts found for this user!' });
       }
+      res.status(500).send('Server Error');
+   }
+});
+
+// @route       GET api/posts/user/liked-posts/:user_id
+// @desc        Get all posts that a user has liked.
+// @access      Private
+router.get('/user/liked-posts/:user_id', auth, async (req, res) => {
+   try {
+      const likedPosts = await Post.find().where({
+         'likes.user': req.params.user_id,
+      });
+
+      if (!likedPosts) {
+         res.status(404).json({ msg: 'User has not  liked any posts' });
+      }
+
+      res.json(likedPosts);
+   } catch (error) {
+      console.error(err);
+
       res.status(500).send('Server Error');
    }
 });
