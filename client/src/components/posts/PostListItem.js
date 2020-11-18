@@ -25,6 +25,8 @@ import ThumbUpIcon from '@material-ui/icons/ThumbUp';
 import ThumbDownIcon from '@material-ui/icons/ThumbDown';
 import DeleteIcon from '@material-ui/icons/Delete';
 import ChatIcon from '@material-ui/icons/Chat';
+import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
+import FavoriteIcon from '@material-ui/icons/Favorite';
 import { addLike, removeLike, deletePost } from '../../actions/post';
 
 const useStyles = makeStyles((theme) => ({
@@ -87,7 +89,7 @@ const convertToEditorState = (editorContent) => {
 
 const PostListItem = ({
    auth,
-   post: { _id, text, name, avatar, user, date, content },
+   post: { _id, name, avatar, user, date, content, likes },
    addLike,
    removeLike,
    deletePost,
@@ -95,6 +97,23 @@ const PostListItem = ({
    button,
 }) => {
    const classes = useStyles();
+
+   const handleLikeorUnlike = () => {
+      // Check to see if the post has been liked by the user
+      if (likes.filter((like) => like.user === auth.user._id).length > 0) {
+         removeLike(_id);
+      } else {
+         addLike(_id);
+      }
+   };
+
+   const renderLikeButtonOptions = () => {
+      if (likes.filter((like) => like.user === auth.user._id).length > 0) {
+         return <FavoriteIcon color="secondary" />;
+      }
+
+      return <FavoriteBorderIcon />;
+   };
 
    return (
       <div className={classes.root}>
@@ -137,16 +156,9 @@ const PostListItem = ({
                         <div className={classes.toolbar}>
                            {/* Like Icon */}
 
-                           <IconButton onClick={() => addLike(_id)}>
-                              <ThumbUpIcon fontSize="small" />
+                           <IconButton onClick={() => handleLikeorUnlike()}>
+                              {renderLikeButtonOptions()}
                            </IconButton>
-
-                           {/* Unlike Icon */}
-                           <IconButton onClick={() => removeLike(_id)}>
-                              <ThumbDownIcon fontSize="small" />
-                           </IconButton>
-                           {/* Comments Icon */}
-
                            <IconButton
                               component={RouterLink}
                               to={`/posts/${_id}`}
