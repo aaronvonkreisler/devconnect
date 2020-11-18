@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 import { convertFromRaw, EditorState, CompositeDecorator } from 'draft-js';
 import MultiDecorator from 'draft-js-plugins-editor/lib/Editor/MultiDecorator';
@@ -95,7 +95,6 @@ const PostListItem = ({
    button,
 }) => {
    const classes = useStyles();
-
    const handleLikeorUnlike = () => {
       // Check to see if the post has been liked by the user
       if (likes.filter((like) => like.user === auth.user._id).length > 0) {
@@ -105,13 +104,13 @@ const PostListItem = ({
       }
    };
 
-   const renderLikeButtonOptions = () => {
+   const renderLikeButtonOptions = useCallback(() => {
       if (likes.filter((like) => like.user === auth.user._id).length > 0) {
          return <FavoriteIcon color="secondary" />;
       }
 
       return <FavoriteBorderIcon />;
-   };
+   }, [likes, auth.user._id]);
 
    return (
       <div className={classes.root}>
@@ -154,7 +153,7 @@ const PostListItem = ({
                         <div className={classes.toolbar}>
                            {/* Like Icon */}
 
-                           <IconButton onClick={() => handleLikeorUnlike()}>
+                           <IconButton onClick={handleLikeorUnlike}>
                               {renderLikeButtonOptions()}
                            </IconButton>
                            <IconButton

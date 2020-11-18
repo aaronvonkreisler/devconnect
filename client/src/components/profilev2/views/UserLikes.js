@@ -1,9 +1,8 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core';
-
-import PostListItem from '../../posts/PostListItem';
-import UnderConstructionImage from '../assets/Under-construction.svg';
 import PropTypes from 'prop-types';
+import PostListItem from '../../posts/PostListItem';
+import { makeStyles } from '@material-ui/core';
+import UnderConstructionImage from '../assets/Under-construction.svg';
 
 const useStyles = makeStyles({
    notFound: {
@@ -12,12 +11,12 @@ const useStyles = makeStyles({
    },
 });
 
-const UserPosts = ({ posts, loading }) => {
+const UserLikes = ({ likedPosts }) => {
    const classes = useStyles();
    return (
       <div>
          <React.Fragment>
-            {posts.length === 0 ? (
+            {likedPosts.length === 0 ? (
                <div className={classes.notFound}>
                   <img
                      src={UnderConstructionImage}
@@ -27,12 +26,12 @@ const UserPosts = ({ posts, loading }) => {
                </div>
             ) : (
                <div>
-                  {posts.map((post) => (
+                  {likedPosts.map((post) => (
                      <PostListItem
+                        showActions={false}
                         post={post}
                         key={post._id}
                         button={false}
-                        showActions={false}
                      />
                   ))}
                </div>
@@ -42,9 +41,8 @@ const UserPosts = ({ posts, loading }) => {
    );
 };
 
-UserPosts.propTypes = {
-   posts: PropTypes.array.isRequired,
-   loading: PropTypes.bool.isRequired,
+UserLikes.propTypes = {
+   likedPosts: PropTypes.array.isRequired,
 };
 
-export default UserPosts;
+export default UserLikes;

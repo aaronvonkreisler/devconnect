@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { makeStyles, AppBar, Box, Tabs, Tab } from '@material-ui/core';
 import UserPosts from './UserPosts';
 import UserAbout from './UserAbout';
+import UserLikes from './UserLikes';
 
 const TabPanel = (props) => {
    const { children, value, index, ...other } = props;
@@ -44,7 +45,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const ProfileTabs = ({
-   selectedUser: { posts, loading },
+   selectedUser: { posts, likedPosts, loading },
    profile: { profile },
 }) => {
    const classes = useStyles();
@@ -77,7 +78,7 @@ const ProfileTabs = ({
             <UserAbout profile={profile} />
          </TabPanel>
          <TabPanel value={value} index={2}>
-            Item Three
+            <UserLikes likedPosts={likedPosts} />
          </TabPanel>
       </div>
    );
