@@ -30,9 +30,9 @@ const Profile = ({
    const classes = useStyles();
 
    useEffect(() => {
-      getProfileById(match.params.id, history);
+      getProfileById(match.params.id, history, auth.user._id);
       getUsersPosts(match.params.id);
-   }, [getProfileById, match.params.id, history, getUsersPosts]);
+   }, [getProfileById, match.params.id, auth.user._id, history, getUsersPosts]);
 
    return (
       <React.Fragment>
