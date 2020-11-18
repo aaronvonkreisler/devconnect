@@ -13,7 +13,7 @@ import {
 } from '@material-ui/core';
 import ExpandMore from '@material-ui/icons/ExpandMore';
 import ExpandLess from '@material-ui/icons/ExpandLess';
-import UnderConstructionImage from '../assets/Server-bro.svg';
+import UnderConstructionImage from '../assets/Under-construction.svg';
 
 const useStyles = makeStyles((theme) => ({
    root: {
@@ -26,16 +26,8 @@ const useStyles = makeStyles((theme) => ({
       paddingLeft: theme.spacing(3),
    },
    notFound: {
-      position: 'relative',
-      color: '#22223b',
       minHeight: 400,
       textAlign: 'center',
-   },
-   centered: {
-      position: 'absolute',
-      top: '50%',
-      left: '50%',
-      transform: 'translate(-50%, -50%)',
    },
 }));
 
@@ -71,9 +63,6 @@ const UserAbout = ({ profile: { education, experience } }) => {
                         width: '55%',
                      }}
                   />
-                  <Typography variant="h5" className={classes.centered}>
-                     Profile Under Construction
-                  </Typography>
                </div>
             )}
          </React.Fragment>
