@@ -278,9 +278,11 @@ router.get('/user/:user_id', auth, async (req, res) => {
 // @access      Private
 router.get('/user/liked-posts/:user_id', auth, async (req, res) => {
    try {
-      const likedPosts = await Post.find().where({
-         'likes.user': req.params.user_id,
-      });
+      const likedPosts = await Post.find()
+         .where({
+            'likes.user': req.params.user_id,
+         })
+         .sort({ date: -1 });
 
       if (!likedPosts) {
          res.status(404).json({ msg: 'User has not  liked any posts' });
