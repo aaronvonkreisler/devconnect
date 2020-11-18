@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link as RouterLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import {
    Card,
@@ -23,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
    },
    cardTop: {
       textAlign: 'center',
-      marginTop: theme.spacing(3),
+      marginTop: theme.spacing(1.5),
    },
    avatar: {
       borderRadius: '50%',
@@ -38,8 +39,8 @@ const useStyles = makeStyles((theme) => ({
    },
    metrics: {
       display: 'flex',
-      marginTop: theme.spacing(1),
-      marginBottom: theme.spacing(1),
+      marginTop: theme.spacing(0.5),
+      marginBottom: theme.spacing(0.5),
       flexDirection: 'row',
       justifyContent: 'space-evenly',
       color: '#A9A9A9',
@@ -70,15 +71,15 @@ const UserCard = ({
    profile: {
       bio,
       company,
-
       location,
       skills,
       social,
       status,
       website,
       githubusername,
-      user: { name, avatar },
+      user: { name, avatar, _id },
    },
+   auth,
    posts,
    loading,
 }) => {
@@ -101,10 +102,23 @@ const UserCard = ({
                      </Typography>
                   )}
                   <div className={classes.follow}>
-                     {/* Will need to implement conditional button to render a button if the person is not following them */}
-                     <Button variant="outlined" size="small" color="primary">
-                        Follow
-                     </Button>
+                     {auth.isAuthenticated &&
+                     auth.loading === false &&
+                     auth.user._id === _id ? (
+                        <Button
+                           color="primary"
+                           variant="outlined"
+                           size="small"
+                           component={RouterLink}
+                           to="/edit-profile"
+                        >
+                           Edit Profile
+                        </Button>
+                     ) : (
+                        <Button variant="outlined" size="small" color="primary">
+                           Follow
+                        </Button>
+                     )}
                   </div>
                   <div className={classes.metrics}>
                      <div>

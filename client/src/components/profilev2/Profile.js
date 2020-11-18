@@ -23,7 +23,7 @@ const Profile = ({
    getProfileById,
    getUsersPosts,
    profile: { profile, loading },
-   auth: { user },
+   auth,
    selectedUser: { posts },
    history,
 }) => {
@@ -52,9 +52,10 @@ const Profile = ({
                   >
                      <UserCard
                         profile={profile}
-                        user={user}
+                        user={auth.user}
                         loading={loading}
                         posts={posts}
+                        auth={auth}
                      />
                   </Grid>
                   <Grid
