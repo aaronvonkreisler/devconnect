@@ -40,7 +40,7 @@ export const getProfiles = () => async (dispatch) => {
 };
 
 // Get profiles by id
-export const getProfileById = (userId, history) => async (dispatch) => {
+export const getProfileById = (userId, history, authId) => async (dispatch) => {
    try {
       const res = await axios.get(`/api/profile/user/${userId}`);
 
@@ -50,7 +50,15 @@ export const getProfileById = (userId, history) => async (dispatch) => {
          type: PROFILE_ERROR,
          payload: { msg: err.response.statusText, status: err.response.status },
       });
-      history.push('/dashboard');
+
+      if (authId === userId) {
+         history.push('/dashboard');
+      } else {
+         history.push('/posts');
+         dispatch(
+            setAlert('User has not yet set up a profile', 'toast', 'info', 5000)
+         );
+      }
    }
 };
 
