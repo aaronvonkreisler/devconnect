@@ -9,7 +9,6 @@ import {
    ListSubheader,
    ListItem,
    ListItemText,
-   Typography,
 } from '@material-ui/core';
 import ExpandMore from '@material-ui/icons/ExpandMore';
 import ExpandLess from '@material-ui/icons/ExpandLess';
