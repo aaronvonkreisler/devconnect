@@ -103,32 +103,20 @@ const UserCard = ({
                   )}
                   <div className={classes.follow}>
                      {auth.isAuthenticated &&
-                     auth.loading === false &&
-                     auth.user._id === _id ? (
-                        <Button
-                           color="primary"
-                           variant="outlined"
-                           size="small"
-                           component={RouterLink}
-                           to="/edit-profile"
-                        >
-                           Edit Profile
-                        </Button>
-                     ) : (
-                        <Button variant="outlined" size="small" color="primary">
-                           Follow
-                        </Button>
-                     )}
+                        auth.loading === false &&
+                        auth.user._id === _id && (
+                           <Button
+                              color="primary"
+                              variant="outlined"
+                              size="small"
+                              component={RouterLink}
+                              to="/edit-profile"
+                           >
+                              Edit Profile
+                           </Button>
+                        )}
                   </div>
-                  <div className={classes.metrics}>
-                     <div>
-                        <p>Following</p>
-                        <p>120</p>
-                     </div>
-                     <div>
-                        <p>Followers</p>
-                        <p>230</p>
-                     </div>
+                  <div className={classes.cardTop}>
                      <div>
                         <p>Posts</p>
                         <p>{posts ? posts.length : 0}</p>
