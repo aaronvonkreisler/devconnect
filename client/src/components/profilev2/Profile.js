@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { Grid, makeStyles } from '@material-ui/core';
+import { Grid, makeStyles, useTheme, useMediaQuery } from '@material-ui/core';
 import { getProfileById } from '../../actions/profile';
 import { getUsersLikedPosts } from '../../actions/profile.js';
 import Spinner from '../layout/Spinner';
@@ -29,6 +29,8 @@ const Profile = ({
    history,
 }) => {
    const classes = useStyles();
+   const theme = useTheme();
+   const mediumDevice = useMediaQuery(theme.breakpoints.up('md'));
 
    useEffect(() => {
       getUsersLikedPosts(match.params.id);
@@ -54,7 +56,7 @@ const Profile = ({
                      md={4}
                      lg={3}
                      xl={3}
-                     className={classes.card}
+                     className={mediumDevice ? classes.card : ''}
                   >
                      <UserCard
                         profile={profile}
@@ -71,12 +73,14 @@ const Profile = ({
                      md={7}
                      lg={8}
                      xl={9}
-                     className={classes.card}
+                     className={mediumDevice ? classes.card : ''}
                   >
                      <ProfileTabs />
                   </Grid>
                   <Grid item xs={12}>
-                     <GithubLayout />
+                     {profile.githubusername && (
+                        <GithubLayout username={profile.githubusername} />
+                     )}
                   </Grid>
                </Grid>
             </div>
