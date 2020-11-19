@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Grid, makeStyles } from '@material-ui/core';
 import { getProfileById } from '../../actions/profile';
-import { getUsersLikedPosts } from '../../actions/selectedUser.js';
+import { getUsersLikedPosts } from '../../actions/profile.js';
 import Spinner from '../layout/Spinner';
 import UserCard from './UserCard';
 import ProfileTabs from './views/ProfileTabs';
@@ -22,11 +22,10 @@ const useStyles = makeStyles((theme) => ({
 const Profile = ({
    match,
    getProfileById,
-
    getUsersLikedPosts,
    profile: { profile, loading },
+   post: { posts },
    auth,
-   selectedUser: { posts, likedPosts },
    history,
 }) => {
    const classes = useStyles();
@@ -97,7 +96,7 @@ Profile.propTypes = {
 const mapStateToProps = (state) => ({
    auth: state.auth,
    profile: state.profile,
-   selectedUser: state.selectedUser,
+   post: state.post,
 });
 
 export default connect(mapStateToProps, {

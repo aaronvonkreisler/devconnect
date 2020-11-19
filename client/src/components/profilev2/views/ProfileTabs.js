@@ -46,8 +46,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const ProfileTabs = ({
-   selectedUser: { likedPosts },
-   profile: { profile },
+   profile: { profile, likedPosts },
    post: { posts, loading },
    getPosts,
 }) => {
@@ -94,7 +93,6 @@ const ProfileTabs = ({
 ProfileTabs.propTypes = {};
 
 const mapStateToProps = (state) => ({
-   selectedUser: state.selectedUser,
    profile: state.profile,
    post: state.post,
 });

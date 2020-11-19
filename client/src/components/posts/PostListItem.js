@@ -105,12 +105,14 @@ const PostListItem = ({
    };
 
    const renderLikeButtonOptions = useCallback(() => {
-      if (likes.filter((like) => like.user === auth.user._id).length > 0) {
-         return <FavoriteIcon color="secondary" />;
+      if (auth.loading === false) {
+         if (likes.filter((like) => like.user === auth.user._id).length > 0) {
+            return <FavoriteIcon color="secondary" />;
+         }
       }
 
       return <FavoriteBorderIcon />;
-   }, [likes, auth.user._id]);
+   }, [likes, auth]);
 
    return (
       <div className={classes.root}>

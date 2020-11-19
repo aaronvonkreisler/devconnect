@@ -8,6 +8,8 @@ import {
    UPDATE_PROFILE,
    CLEAR_PROFILE,
    ACCOUNT_DELETED,
+   GET_USER_LIKED_POSTS,
+   FETCH_USER_POSTS_ERROR,
 } from './types';
 
 // Get the current users profile
@@ -235,5 +237,20 @@ export const deleteAccount = () => async (dispatch) => {
             },
          });
       }
+   }
+};
+
+export const getUsersLikedPosts = (userId) => async (dispatch) => {
+   try {
+      const res = await axios.get(`/api/posts/user/liked-posts/${userId}`);
+      dispatch({
+         type: GET_USER_LIKED_POSTS,
+         payload: res.data,
+      });
+   } catch (err) {
+      dispatch({
+         type: FETCH_USER_POSTS_ERROR,
+         payload: { msg: err.response.statusText, status: err.response.status },
+      });
    }
 };
