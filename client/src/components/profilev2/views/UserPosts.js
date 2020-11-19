@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/core';
 
 import PostListItem from '../../posts/PostListItem';
@@ -10,14 +10,31 @@ const useStyles = makeStyles({
       minHeight: 400,
       textAlign: 'center',
    },
+   root: {
+      maxHeight: 650,
+      position: 'relative',
+      overflow: 'auto',
+   },
 });
 
-const UserPosts = ({ posts, loading }) => {
+const UserPosts = ({ posts, loading, profile: { user } }) => {
    const classes = useStyles();
+   const [usersPosts, setUsersPosts] = useState([]);
+
+   useEffect(() => {
+      if (posts) {
+         const userSpecificPosts = posts.filter(
+            (post) => post.user === user._id
+         );
+
+         setUsersPosts(userSpecificPosts);
+      }
+   }, [posts, user._id]);
+
    return (
       <div>
          <React.Fragment>
-            {posts.length === 0 ? (
+            {usersPosts.length === 0 ? (
                <div className={classes.notFound}>
                   <img
                      src={UnderConstructionImage}
@@ -26,13 +43,13 @@ const UserPosts = ({ posts, loading }) => {
                   />
                </div>
             ) : (
-               <div>
-                  {posts.map((post) => (
+               <div className={classes.root}>
+                  {usersPosts.map((post) => (
                      <PostListItem
                         post={post}
                         key={post._id}
                         button={false}
-                        showActions={false}
+                        showActions={true}
                      />
                   ))}
                </div>

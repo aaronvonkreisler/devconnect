@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { makeStyles, AppBar, Box, Tabs, Tab } from '@material-ui/core';
+import { getPosts } from '../../../actions/post';
 import UserPosts from './UserPosts';
 import UserAbout from './UserAbout';
 import UserLikes from './UserLikes';
@@ -45,15 +46,21 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const ProfileTabs = ({
-   selectedUser: { posts, likedPosts, loading },
+   selectedUser: { likedPosts },
    profile: { profile },
+   post: { posts, loading },
+   getPosts,
 }) => {
    const classes = useStyles();
-   const [value, setValue] = React.useState(0);
+   const [value, setValue] = useState(0);
 
    const handleChange = (event, newValue) => {
       setValue(newValue);
    };
+
+   useEffect(() => {
+      getPosts();
+   }, [getPosts]);
 
    return (
       <div className={classes.root}>
@@ -72,7 +79,7 @@ const ProfileTabs = ({
             </Tabs>
          </AppBar>
          <TabPanel value={value} index={0}>
-            <UserPosts posts={posts} loading={loading} />
+            <UserPosts posts={posts} loading={loading} profile={profile} />
          </TabPanel>
          <TabPanel value={value} index={1}>
             <UserAbout profile={profile} />
@@ -89,6 +96,7 @@ ProfileTabs.propTypes = {};
 const mapStateToProps = (state) => ({
    selectedUser: state.selectedUser,
    profile: state.profile,
+   post: state.post,
 });
 
-export default connect(mapStateToProps)(ProfileTabs);
+export default connect(mapStateToProps, { getPosts })(ProfileTabs);

@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from 'react';
+import React, { useCallback } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 import { convertFromRaw, EditorState, CompositeDecorator } from 'draft-js';
 import MultiDecorator from 'draft-js-plugins-editor/lib/Editor/MultiDecorator';
@@ -162,7 +162,6 @@ const PostListItem = ({
                            >
                               <ChatIcon fontSize="small" />
                            </IconButton>
-
                            {!auth.loading && user === auth.user._id && (
                               <IconButton onClick={() => deletePost(_id)}>
                                  <DeleteIcon

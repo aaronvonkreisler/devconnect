@@ -4,13 +4,11 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Grid, makeStyles } from '@material-ui/core';
 import { getProfileById } from '../../actions/profile';
-import {
-   getUsersPosts,
-   getUsersLikedPosts,
-} from '../../actions/selectedUser.js';
+import { getUsersLikedPosts } from '../../actions/selectedUser.js';
 import Spinner from '../layout/Spinner';
 import UserCard from './UserCard';
 import ProfileTabs from './views/ProfileTabs';
+import GithubLayout from './github/GithubLayout';
 
 const useStyles = makeStyles((theme) => ({
    root: {
@@ -24,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
 const Profile = ({
    match,
    getProfileById,
-   getUsersPosts,
+
    getUsersLikedPosts,
    profile: { profile, loading },
    auth,
@@ -34,9 +32,8 @@ const Profile = ({
    const classes = useStyles();
 
    useEffect(() => {
-      getUsersPosts(match.params.id);
       getUsersLikedPosts(match.params.id);
-   }, [match.params.id, history, getUsersPosts, getUsersLikedPosts]);
+   }, [match.params.id, history, getUsersLikedPosts]);
 
    useEffect(() => {
       if (auth.user) {
@@ -50,7 +47,7 @@ const Profile = ({
             <Spinner />
          ) : (
             <div className={classes.root}>
-               <Grid container spacing={1} direction="row">
+               <Grid container direction="row">
                   <Grid
                      item
                      xs={12}
@@ -79,6 +76,9 @@ const Profile = ({
                   >
                      <ProfileTabs />
                   </Grid>
+                  <Grid item xs={12}>
+                     <GithubLayout />
+                  </Grid>
                </Grid>
             </div>
          )}
@@ -88,7 +88,7 @@ const Profile = ({
 
 Profile.propTypes = {
    getProfileById: PropTypes.func.isRequired,
-   getUsersPosts: PropTypes.func.isRequired,
+
    getUsersLikedPosts: PropTypes.func.isRequired,
    auth: PropTypes.object.isRequired,
    profile: PropTypes.object.isRequired,
@@ -102,6 +102,6 @@ const mapStateToProps = (state) => ({
 
 export default connect(mapStateToProps, {
    getProfileById,
-   getUsersPosts,
+
    getUsersLikedPosts,
 })(withRouter(Profile));
