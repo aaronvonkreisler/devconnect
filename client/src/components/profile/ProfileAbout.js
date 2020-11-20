@@ -1,11 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Card, Typography, Divider, makeStyles } from '@material-ui/core';
+import { Typography, Divider, makeStyles } from '@material-ui/core';
 import CheckBoxIcon from '@material-ui/icons/CheckBox';
 const useStyles = makeStyles((theme) => ({
    root: {
-      marginTop: theme.spacing(1),
-      textAlign: 'center',
+      marginLeft: theme.spacing(1),
+      textAlign: 'left',
    },
    icon: {
       color: 'green',
@@ -30,19 +30,22 @@ const ProfileAbout = ({
    profile: {
       bio,
       skills,
+      status,
+      company,
+      location,
+      website,
+      social,
       user: { name },
    },
 }) => {
    const classes = useStyles();
    return (
       <div className={classes.root}>
-         <Card>
+         <div>
             {bio && (
                <div>
                   <div className={classes.bio}>
-                     <Typography variant="h6">
-                        {name.trim().split(' ')[0]}'s Bio
-                     </Typography>
+                     <Typography variant="h6">{name}</Typography>
                      <Typography variant="body1">{bio}</Typography>
                   </div>
 
@@ -69,7 +72,7 @@ const ProfileAbout = ({
                   ))}
                </ul>
             </div>
-         </Card>
+         </div>
       </div>
    );
 };

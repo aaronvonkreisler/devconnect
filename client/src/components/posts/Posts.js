@@ -1,20 +1,18 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Container, Typography, makeStyles } from '@material-ui/core';
+import { List, makeStyles } from '@material-ui/core';
 import { getPosts } from '../../actions/post';
-import PostItem from './PostItem';
+
+import PostListItem from './PostListItem';
 import Spinner from '../layout/Spinner';
 
+import PostEditor from './PostEditor';
+
 const useStyles = makeStyles((theme) => ({
-   container: {
-      marginTop: '2rem',
-   },
-   posts: {
-      display: 'grid',
-      gridTemplateColumns: '1fr 4fr',
-      gridGap: '2rem',
-      alignItems: 'center',
+   list: {
+      width: '100%',
+      backgroundColor: 'inherit',
    },
 }));
 
@@ -28,16 +26,14 @@ const Posts = ({ getPosts, post: { posts, loading } }) => {
    return loading ? (
       <Spinner />
    ) : (
-      <Container className={classes.container}>
-         <Typography variant="h2">Posts</Typography>
-         <Typography variant="h5">Welcome to the community!</Typography>
-         {/* Post Form  */}
-         <div className={classes.posts}>
+      <div>
+         <List className={classes.list} subheader={<li />}>
+            <PostEditor />
             {posts.map((post) => (
-               <PostItem key={post._id} post={post} />
+               <PostListItem key={post._id} post={post} button={false} />
             ))}
-         </div>
-      </Container>
+         </List>
+      </div>
    );
 };
 

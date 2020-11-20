@@ -178,11 +178,11 @@ const CreateProfile = ({ createProfile, history }) => {
                         <TextField
                            fullWidth
                            type="text"
-                           label="* Skills"
+                           label="Tech Stack"
                            name="skills"
                            variant="outlined"
                            helperText="Please use comma separated values e.g.
-                        HTML,CSS,JavaScript,Python"
+                        Node.js, React, MongoDB,"
                            value={skills}
                            onChange={(e) => onChange(e)}
                         />

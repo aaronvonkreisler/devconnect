@@ -8,6 +8,9 @@ const PostSchema = new Schema({
    },
    text: {
       type: String,
+   },
+   content: {
+      type: Object,
       required: true,
    },
    name: {

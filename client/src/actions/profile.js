@@ -8,6 +8,8 @@ import {
    UPDATE_PROFILE,
    CLEAR_PROFILE,
    ACCOUNT_DELETED,
+   GET_USER_LIKED_POSTS,
+   FETCH_USER_POSTS_ERROR,
 } from './types';
 
 // Get the current users profile
@@ -40,7 +42,7 @@ export const getProfiles = () => async (dispatch) => {
 };
 
 // Get profiles by id
-export const getProfileById = (userId) => async (dispatch) => {
+export const getProfileById = (userId, history, authId) => async (dispatch) => {
    try {
       const res = await axios.get(`/api/profile/user/${userId}`);
 
@@ -50,11 +52,19 @@ export const getProfileById = (userId) => async (dispatch) => {
          type: PROFILE_ERROR,
          payload: { msg: err.response.statusText, status: err.response.status },
       });
+
+      if (authId === userId) {
+         history.push('/dashboard');
+      } else {
+         history.push('/posts');
+         dispatch(
+            setAlert('User has not yet set up a profile', 'toast', 'info', 5000)
+         );
+      }
    }
 };
 
 // Get Github repos
-// Get all profiles
 export const getGithubRepos = (username) => async (dispatch) => {
    try {
       const res = await axios.get(`/api/profile/github/${username}`);
@@ -227,5 +237,20 @@ export const deleteAccount = () => async (dispatch) => {
             },
          });
       }
+   }
+};
+
+export const getUsersLikedPosts = (userId) => async (dispatch) => {
+   try {
+      const res = await axios.get(`/api/posts/user/liked-posts/${userId}`);
+      dispatch({
+         type: GET_USER_LIKED_POSTS,
+         payload: res.data,
+      });
+   } catch (err) {
+      dispatch({
+         type: FETCH_USER_POSTS_ERROR,
+         payload: { msg: err.response.statusText, status: err.response.status },
+      });
    }
 };

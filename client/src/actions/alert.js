@@ -5,7 +5,7 @@ export const setAlert = (
    msg,
    alertType = 'toast',
    severity,
-   timeout = 5000
+   timeout = 3000
 ) => (dispatch) => {
    const id = uuid();
    dispatch({
