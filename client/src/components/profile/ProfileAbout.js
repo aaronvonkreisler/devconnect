@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Card, Typography, Divider, makeStyles } from '@material-ui/core';
+import { Typography, Divider, makeStyles } from '@material-ui/core';
 import CheckBoxIcon from '@material-ui/icons/CheckBox';
 const useStyles = makeStyles((theme) => ({
    root: {
