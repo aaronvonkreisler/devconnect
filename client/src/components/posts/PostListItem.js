@@ -29,7 +29,8 @@ import { addLike, removeLike, deletePost } from '../../actions/post';
 
 const useStyles = makeStyles((theme) => ({
    root: {
-      border: '1px solid #EAEAED',
+      border: '2px solid #EAEAED',
+      backgroundColor: 'white',
    },
    inline: {
       display: 'inline',
