@@ -17,6 +17,10 @@ const useStyles = makeStyles((theme) => ({
    card: {
       marginLeft: theme.spacing(2),
    },
+   repos: {
+      paddingLeft: theme.spacing(2),
+      paddingRight: theme.spacing(2),
+   },
 }));
 
 const Profile = ({
@@ -55,7 +59,7 @@ const Profile = ({
                      sm={12}
                      md={4}
                      lg={3}
-                     xl={3}
+                     xl={2}
                      className={mediumDevice ? classes.card : ''}
                   >
                      <UserCard
@@ -77,10 +81,12 @@ const Profile = ({
                   >
                      <ProfileTabs />
                   </Grid>
-                  <Grid item xs={12}>
-                     {profile.githubusername && (
-                        <GithubLayout username={profile.githubusername} />
-                     )}
+                  <Grid item xs={12} className={classes.repos}>
+                     <div>
+                        {profile.githubusername && (
+                           <GithubLayout username={profile.githubusername} />
+                        )}
+                     </div>
                   </Grid>
                </Grid>
             </div>
