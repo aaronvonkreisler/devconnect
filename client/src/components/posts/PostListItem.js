@@ -13,7 +13,6 @@ import PropTypes from 'prop-types';
 import {
    ListItem,
    Box,
-   IconButton,
    Typography,
    Avatar,
    ListItemAvatar,
@@ -41,11 +40,22 @@ const useStyles = makeStyles((theme) => ({
       alignItems: 'flex-end',
       justifyContent: 'flex-start',
    },
+   toolbarItem: {
+      marginRight: theme.spacing(2),
+   },
    mt2: {
       marginTop: theme.spacing(2),
    },
    timeStamp: {
       marginTop: theme.spacing(0.5),
+   },
+   icon: {
+      marginRight: theme.spacing(1),
+      flexShrink: 0,
+      verticalAlign: 'bottom',
+      '&:hover': {
+         cursor: 'pointer',
+      },
    },
 }));
 // ------------- Functions for the view only Editor -----------
@@ -88,7 +98,7 @@ const convertToEditorState = (editorContent) => {
 
 const PostListItem = ({
    auth,
-   post: { _id, name, avatar, user, date, content, likes },
+   post: { _id, name, avatar, user, date, content, likes, comments },
    addLike,
    removeLike,
    deletePost,
@@ -108,12 +118,18 @@ const PostListItem = ({
    const renderLikeButtonOptions = useCallback(() => {
       if (auth.loading === false) {
          if (likes.filter((like) => like.user === auth.user._id).length > 0) {
-            return <FavoriteIcon color="secondary" />;
+            return (
+               <FavoriteIcon
+                  color="secondary"
+                  fontSize="small"
+                  className={classes.icon}
+               />
+            );
          }
       }
 
-      return <FavoriteBorderIcon />;
-   }, [likes, auth]);
+      return <FavoriteBorderIcon fontSize="small" className={classes.icon} />;
+   }, [likes, auth, classes.icon]);
 
    return (
       <div className={classes.root}>
@@ -155,23 +171,45 @@ const PostListItem = ({
                      {showActions && (
                         <div className={classes.toolbar}>
                            {/* Like Icon */}
+                           <span className={classes.toolbarItem}>
+                              <span onClick={handleLikeorUnlike}>
+                                 {renderLikeButtonOptions()}
+                              </span>
+                              <Typography variant="caption" component="span">
+                                 {likes.length}{' '}
+                                 {likes.length === 1 ? 'like' : 'likes'}
+                              </Typography>
+                           </span>
 
-                           <IconButton onClick={handleLikeorUnlike}>
-                              {renderLikeButtonOptions()}
-                           </IconButton>
-                           <IconButton
-                              component={RouterLink}
-                              to={`/posts/${_id}`}
-                           >
-                              <ChatIcon fontSize="small" />
-                           </IconButton>
+                           <span className={classes.toolbarItem}>
+                              <span>
+                                 <RouterLink to={`/posts/${_id}`}>
+                                    <ChatIcon
+                                       fontSize="small"
+                                       className={classes.icon}
+                                    />
+                                 </RouterLink>
+                                 <Typography variant="caption" component="span">
+                                    {comments.length}{' '}
+                                    {comments.length === 1
+                                       ? 'comment'
+                                       : 'comments'}
+                                 </Typography>
+                              </span>
+                           </span>
                            {!auth.loading && user === auth.user._id && (
-                              <IconButton onClick={() => deletePost(_id)}>
-                                 <DeleteIcon
-                                    color="secondary"
-                                    fontSize="small"
-                                 />
-                              </IconButton>
+                              <span
+                                 onClick={() => deletePost(_id)}
+                                 className={classes.toolbarItem}
+                              >
+                                 <span>
+                                    <DeleteIcon
+                                       color="secondary"
+                                       fontSize="small"
+                                       className={classes.icon}
+                                    />
+                                 </span>
+                              </span>
                            )}
                         </div>
                      )}
