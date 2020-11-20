@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Moment from 'react-moment';
-import { makeStyles, Card, Typography, Chip, Grid } from '@material-ui/core';
+import { makeStyles, Card, Typography, Grid } from '@material-ui/core';
 import BookOutlinedIcon from '@material-ui/icons/BookOutlined';
 import CallSplitIcon from '@material-ui/icons/CallSplit';
 import StarBorderIcon from '@material-ui/icons/StarBorder';
