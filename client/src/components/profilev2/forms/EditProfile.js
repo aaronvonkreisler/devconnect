@@ -34,6 +34,7 @@ const useStyles = makeStyles((theme) => ({
       flexDirection: 'row',
       alignItems: 'flex-end',
       justifyContent: 'flex-end',
+      marginTop: theme.spacing(1),
    },
 }));
 
@@ -124,7 +125,7 @@ const EditProfile = ({
    };
    return (
       <Dialog open={onEditOpen} onClose={handleClose} maxWidth="sm" fullWidth>
-         <DialogTitle>Create a Profile</DialogTitle>
+         <DialogTitle>Edit Profile</DialogTitle>
          <DialogContent dividers>
             <FormControl fullWidth className={classes.formControl}>
                <InputLabel id="status">Professional Status</InputLabel>
