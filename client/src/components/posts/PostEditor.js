@@ -69,7 +69,7 @@ const PostEditor = ({ addPost, auth: { user, loading } }) => {
                      <Avatar className={classes.avatar} />
                   )
                }
-               title={user && user.name}
+               title={user && <strong> {user.name}</strong>}
             />
             <div className="draft-js-editor">
                <CardContent>
