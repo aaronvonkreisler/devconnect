@@ -116,12 +116,7 @@ const UserCard = ({
                            </Button>
                         )}
                   </div>
-                  <div className={classes.cardTop}>
-                     <div>
-                        <p>Posts</p>
-                        <p>{posts ? posts.length : 0}</p>
-                     </div>
-                  </div>
+
                   <Divider variant="middle" />
                   <div>
                      {bio && (
