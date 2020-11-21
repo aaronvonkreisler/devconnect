@@ -12,6 +12,7 @@ import AccountCircle from '@material-ui/icons/AccountCircle';
 import CreateProfile from '../profilev2/forms/CreateProfile';
 import EditProfile from '../profilev2/forms/EditProfile';
 import AddExperience from '../profilev2/forms/AddExperience';
+import AddEducation from '../profilev2/forms/AddEducation';
 
 const Dashboard = ({
    getCurrentProfile,
@@ -22,6 +23,7 @@ const Dashboard = ({
    const [onCreateOpen, setOnCreateOpen] = useState(false);
    const [onEditOpen, setOnEditOpen] = useState(false);
    const [onExperienceOpen, setOnExperienceOpen] = useState(false);
+   const [onEducationOpen, setOnEducationOpen] = useState(false);
 
    useEffect(() => {
       getCurrentProfile();
@@ -39,6 +41,7 @@ const Dashboard = ({
                   <DashboardActions
                      setOnEditOpen={setOnEditOpen}
                      setOnExperienceOpen={setOnExperienceOpen}
+                     setOnEducationOpen={setOnEducationOpen}
                   />
                   <EditProfile
                      onEditOpen={onEditOpen}
@@ -47,6 +50,10 @@ const Dashboard = ({
                   <AddExperience
                      onExperienceOpen={onExperienceOpen}
                      setOnExperienceOpen={setOnExperienceOpen}
+                  />
+                  <AddEducation
+                     onEducationOpen={onEducationOpen}
+                     setOnEducationOpen={setOnEducationOpen}
                   />
                   <Experience experience={profile.experience} />
                   <Education education={profile.education} />

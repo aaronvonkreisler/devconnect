@@ -6,7 +6,6 @@ import store from './store';
 import './App.css';
 import './styles/_app.scss';
 import Alert from './components/layout/Alert';
-import AddEducation from './components/profile-form/AddEducation';
 
 import Dashboard from './components/dashboard/Dashboard';
 
@@ -64,11 +63,6 @@ const App = () => {
                         exact
                         path="/dashboard"
                         component={Dashboard}
-                     />
-                     <PrivateRoute
-                        exact
-                        path="/add-education"
-                        component={AddEducation}
                      />
                      <PrivateRoute exact path="/posts" component={Posts} />
                      <PrivateRoute exact path="/posts/:id" component={Post} />

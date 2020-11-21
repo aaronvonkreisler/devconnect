@@ -12,6 +12,7 @@ import {
    GET_USER_LIKED_POSTS,
    FETCH_USER_POSTS_ERROR,
    EXPERIENCE_ERROR,
+   EDUCATION_ERROR,
 } from './types';
 
 // Get the current users profile
@@ -149,7 +150,7 @@ export const addExperience = (formData) => async (dispatch) => {
 };
 
 // Add education
-export const addEducation = (formData, history) => async (dispatch) => {
+export const addEducation = (formData) => async (dispatch) => {
    try {
       const config = {
          headers: {
@@ -161,18 +162,16 @@ export const addEducation = (formData, history) => async (dispatch) => {
       dispatch({ type: UPDATE_PROFILE, payload: res.data });
 
       dispatch(setAlert('Education Added', 'toast', 'success'));
-
-      history.push('/dashboard');
    } catch (err) {
       const errors = err.response.data.errors;
 
       if (errors) {
          errors.forEach((error) =>
-            dispatch(setAlert(error.msg, 'block', 'error'))
+            dispatch(setAlert(error.msg, 'toast', 'error'))
          );
       }
       dispatch({
-         type: PROFILE_ERROR,
+         type: EDUCATION_ERROR,
          payload: { msg: err.response.statusText, status: err.response.status },
       });
    }

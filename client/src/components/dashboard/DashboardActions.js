@@ -10,7 +10,11 @@ const useStyles = makeStyles((theme) => ({
       margin: theme.spacing(1),
    },
 }));
-const DashboardActions = ({ setOnEditOpen, setOnExperienceOpen }) => {
+const DashboardActions = ({
+   setOnEditOpen,
+   setOnExperienceOpen,
+   setOnEducationOpen,
+}) => {
    const classes = useStyles();
    return (
       <div>
@@ -33,8 +37,7 @@ const DashboardActions = ({ setOnEditOpen, setOnExperienceOpen }) => {
             Add Experience
          </Button>
          <Button
-            component={RouterLink}
-            to="/add-education"
+            onClick={() => setOnEducationOpen(true)}
             startIcon={<SchoolIcon />}
             variant="contained"
             color="default"

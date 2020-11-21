@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import {
    makeStyles,
-   Container,
    Dialog,
    DialogTitle,
    DialogContent,
@@ -20,6 +19,9 @@ import { addExperience } from '../../../actions/profile';
 const useStyles = makeStyles((theme) => ({
    formControl: {
       margin: theme.spacing(1),
+   },
+   container: {
+      paddingRight: theme.spacing(1),
    },
 }));
 
@@ -74,87 +76,89 @@ const AddExperience = ({
       <Dialog open={onExperienceOpen} onClose={handleClose} maxWidth="sm">
          <DialogTitle>Add Experience</DialogTitle>
          <DialogContent dividers>
-            <FormControl className={classes.formControl} fullWidth>
-               <TextField
-                  type="text"
-                  label="Job Title"
-                  name="title"
-                  required
-                  value={title}
-                  onChange={(e) => onChange(e)}
-               />
-            </FormControl>
-            <FormControl className={classes.formControl} fullWidth>
-               <TextField
-                  type="text"
-                  label="Company"
-                  name="company"
-                  required
-                  value={company}
-                  onChange={(e) => onChange(e)}
-               />
-            </FormControl>
-            <FormControl className={classes.formControl} fullWidth>
-               <TextField
-                  type="text"
-                  label="Location"
-                  name="location"
-                  required
-                  value={location}
-                  onChange={(e) => onChange(e)}
-               />
-            </FormControl>
-            <FormControl className={classes.formControl} fullWidth>
-               <TextField
-                  label="From Date"
-                  type="date"
-                  name="from"
-                  value={from}
-                  required
-                  InputLabelProps={{ shrink: true }}
-                  onChange={(e) => onChange(e)}
-               />
-            </FormControl>
-            <FormControl className={classes.formControl} fullWidth>
-               <FormControlLabel
-                  control={
-                     <Checkbox
-                        name="current"
-                        checked={current}
-                        value={current}
-                        onChange={(e) => {
-                           setFormData({
-                              ...formData,
-                              current: !current,
-                           });
-                        }}
-                     />
-                  }
-                  label="Current Job"
-               />
-            </FormControl>
-            <FormControl className={classes.formControl} fullWidth>
-               <TextField
-                  label="To Date"
-                  type="date"
-                  name="to"
-                  value={to}
-                  InputLabelProps={{ shrink: true }}
-                  onChange={(e) => onChange(e)}
-                  disabled={current}
-               />
-            </FormControl>
-            <FormControl className={classes.formControl} fullWidth>
-               <TextField
-                  name="description"
-                  variant="outlined"
-                  multiline
-                  rows={5}
-                  label="Job Description"
-                  value={description}
-                  onChange={(e) => onChange(e)}
-               />
-            </FormControl>
+            <div className={classes.container}>
+               <FormControl className={classes.formControl} fullWidth>
+                  <TextField
+                     type="text"
+                     label="Job Title"
+                     name="title"
+                     required
+                     value={title}
+                     onChange={(e) => onChange(e)}
+                  />
+               </FormControl>
+               <FormControl className={classes.formControl} fullWidth>
+                  <TextField
+                     type="text"
+                     label="Company"
+                     name="company"
+                     required
+                     value={company}
+                     onChange={(e) => onChange(e)}
+                  />
+               </FormControl>
+               <FormControl className={classes.formControl} fullWidth>
+                  <TextField
+                     type="text"
+                     label="Location"
+                     name="location"
+                     required
+                     value={location}
+                     onChange={(e) => onChange(e)}
+                  />
+               </FormControl>
+               <FormControl className={classes.formControl} fullWidth>
+                  <TextField
+                     label="From Date"
+                     type="date"
+                     name="from"
+                     value={from}
+                     required
+                     InputLabelProps={{ shrink: true }}
+                     onChange={(e) => onChange(e)}
+                  />
+               </FormControl>
+               <FormControl className={classes.formControl} fullWidth>
+                  <FormControlLabel
+                     control={
+                        <Checkbox
+                           name="current"
+                           checked={current}
+                           value={current}
+                           onChange={(e) => {
+                              setFormData({
+                                 ...formData,
+                                 current: !current,
+                              });
+                           }}
+                        />
+                     }
+                     label="Current Job"
+                  />
+               </FormControl>
+               <FormControl className={classes.formControl} fullWidth>
+                  <TextField
+                     label="To Date"
+                     type="date"
+                     name="to"
+                     value={to}
+                     InputLabelProps={{ shrink: true }}
+                     onChange={(e) => onChange(e)}
+                     disabled={current}
+                  />
+               </FormControl>
+               <FormControl className={classes.formControl} fullWidth>
+                  <TextField
+                     name="description"
+                     variant="outlined"
+                     multiline
+                     rows={5}
+                     label="Job Description"
+                     value={description}
+                     onChange={(e) => onChange(e)}
+                  />
+               </FormControl>
+            </div>
          </DialogContent>
          <DialogActions>
             <Button onClick={handleClose} color="primary">
