@@ -7,7 +7,6 @@ import './App.css';
 import './styles/_app.scss';
 import Alert from './components/layout/Alert';
 import AddEducation from './components/profile-form/AddEducation';
-import AddExperience from './components/profile-form/AddExperience';
 
 import Dashboard from './components/dashboard/Dashboard';
 
@@ -65,11 +64,6 @@ const App = () => {
                         exact
                         path="/dashboard"
                         component={Dashboard}
-                     />
-                     <PrivateRoute
-                        exact
-                        path="/add-experience"
-                        component={AddExperience}
                      />
                      <PrivateRoute
                         exact

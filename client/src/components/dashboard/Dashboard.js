@@ -11,6 +11,7 @@ import Spinner from '../layout/Spinner';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import CreateProfile from '../profilev2/forms/CreateProfile';
 import EditProfile from '../profilev2/forms/EditProfile';
+import AddExperience from '../profilev2/forms/AddExperience';
 
 const Dashboard = ({
    getCurrentProfile,
@@ -20,6 +21,7 @@ const Dashboard = ({
 }) => {
    const [onCreateOpen, setOnCreateOpen] = useState(false);
    const [onEditOpen, setOnEditOpen] = useState(false);
+   const [onExperienceOpen, setOnExperienceOpen] = useState(false);
 
    useEffect(() => {
       getCurrentProfile();
@@ -34,10 +36,17 @@ const Dashboard = ({
             {profile !== null ? (
                // User has a profile -- render dashboard
                <React.Fragment>
-                  <DashboardActions setOnEditOpen={setOnEditOpen} />
+                  <DashboardActions
+                     setOnEditOpen={setOnEditOpen}
+                     setOnExperienceOpen={setOnExperienceOpen}
+                  />
                   <EditProfile
                      onEditOpen={onEditOpen}
                      setOnEditOpen={setOnEditOpen}
+                  />
+                  <AddExperience
+                     onExperienceOpen={onExperienceOpen}
+                     setOnExperienceOpen={setOnExperienceOpen}
                   />
                   <Experience experience={profile.experience} />
                   <Education education={profile.education} />

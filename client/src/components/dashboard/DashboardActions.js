@@ -10,7 +10,7 @@ const useStyles = makeStyles((theme) => ({
       margin: theme.spacing(1),
    },
 }));
-const DashboardActions = ({ setOnEditOpen }) => {
+const DashboardActions = ({ setOnEditOpen, setOnExperienceOpen }) => {
    const classes = useStyles();
    return (
       <div>
@@ -24,8 +24,7 @@ const DashboardActions = ({ setOnEditOpen }) => {
             Edit Profile
          </Button>
          <Button
-            component={RouterLink}
-            to="/add-experience"
+            onClick={() => setOnExperienceOpen(true)}
             startIcon={<WorkIcon />}
             variant="contained"
             color="default"
