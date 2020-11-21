@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link as RouterLink } from 'react-router-dom';
+
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Container, Typography, Button } from '@material-ui/core';
@@ -32,7 +32,7 @@ const Dashboard = ({
    return loading && profile === null ? (
       <Spinner />
    ) : (
-      <Container style={{ marginTop: '2rem' }}>
+      <Container>
          <React.Fragment>
             <Typography variant="h5">Welcome {user && user.name}!</Typography>
             {profile !== null ? (
