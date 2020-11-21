@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -9,6 +9,7 @@ import Experience from './Experience';
 import DashboardActions from './DashboardActions';
 import Spinner from '../layout/Spinner';
 import AccountCircle from '@material-ui/icons/AccountCircle';
+import CreateProfile from '../profilev2/forms/CreateProfile';
 
 const Dashboard = ({
    getCurrentProfile,
@@ -16,6 +17,8 @@ const Dashboard = ({
    auth: { user },
    profile: { profile, loading },
 }) => {
+   const [onCreateOpen, setOnCreateOpen] = useState(false);
+
    useEffect(() => {
       getCurrentProfile();
    }, [getCurrentProfile]);
@@ -48,13 +51,18 @@ const Dashboard = ({
                <React.Fragment>
                   <p>You have not yet setup a profile, please add some info</p>
                   <Button
-                     component={RouterLink}
-                     to="/create-profile"
+                     onClick={() => setOnCreateOpen(true)}
                      color="primary"
                      variant="contained"
                   >
                      Create Profile
                   </Button>
+                  <React.Fragment>
+                     <CreateProfile
+                        onCreateOpen={onCreateOpen}
+                        setOnCreateOpen={setOnCreateOpen}
+                     />
+                  </React.Fragment>
                </React.Fragment>
             )}
          </React.Fragment>
