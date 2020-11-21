@@ -58,7 +58,11 @@ const useStyles = makeStyles((theme) => ({
    },
 }));
 
-const Navigation = ({ children, auth: { user, loading }, logout }) => {
+const Navigation = ({
+   children,
+   auth: { user, loading, isAuthenticated },
+   logout,
+}) => {
    const classes = useStyles();
    const theme = useTheme();
    const [mobileOpen, setMobileOpen] = useState(false);
@@ -86,7 +90,7 @@ const Navigation = ({ children, auth: { user, loading }, logout }) => {
       {
          text: 'Profile',
          icon: <PersonOutlineIcon />,
-         path: !loading && user ? `/profile/${user._id}` : null,
+         path: !loading && isAuthenticated ? `/profile/${user._id}` : '/posts',
       },
    ];
 
