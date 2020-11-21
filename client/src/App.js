@@ -10,7 +10,7 @@ import AddEducation from './components/profile-form/AddEducation';
 import AddExperience from './components/profile-form/AddExperience';
 
 import Dashboard from './components/dashboard/Dashboard';
-import EditProfile from './components/profile-form/EditProfile';
+
 import Landing from './components/layout/Landing';
 import Login from './components/auth/Login';
 import Navigation from './components/layout/Navigation';
@@ -65,11 +65,6 @@ const App = () => {
                         exact
                         path="/dashboard"
                         component={Dashboard}
-                     />
-                     <PrivateRoute
-                        exact
-                        path="/edit-profile"
-                        component={EditProfile}
                      />
                      <PrivateRoute
                         exact

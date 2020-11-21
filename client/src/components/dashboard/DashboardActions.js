@@ -10,13 +10,12 @@ const useStyles = makeStyles((theme) => ({
       margin: theme.spacing(1),
    },
 }));
-const DashboardActions = () => {
+const DashboardActions = ({ setOnEditOpen }) => {
    const classes = useStyles();
    return (
       <div>
          <Button
-            component={RouterLink}
-            to="/edit-profile"
+            onClick={() => setOnEditOpen(true)}
             startIcon={<AccountCircleIcon />}
             variant="contained"
             color="default"

@@ -110,7 +110,7 @@ const UserCard = ({
                               variant="outlined"
                               size="small"
                               component={RouterLink}
-                              to="/edit-profile"
+                              to="/dashboard"
                            >
                               Edit Profile
                            </Button>
