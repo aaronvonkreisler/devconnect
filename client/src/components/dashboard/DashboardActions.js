@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link as RouterLink } from 'react-router-dom';
+
 import { Button } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
@@ -8,38 +8,40 @@ import SchoolIcon from '@material-ui/icons/School';
 const useStyles = makeStyles((theme) => ({
    button: {
       margin: theme.spacing(1),
+      verticalAlign: 'bottom',
    },
 }));
-const DashboardActions = () => {
+const DashboardActions = ({
+   setOnEditOpen,
+   setOnExperienceOpen,
+   setOnEducationOpen,
+}) => {
    const classes = useStyles();
    return (
       <div>
          <Button
-            component={RouterLink}
-            to="/edit-profile"
+            onClick={() => setOnEditOpen(true)}
             startIcon={<AccountCircleIcon />}
-            variant="contained"
-            color="default"
+            variant="outlined"
+            color="primary"
             className={classes.button}
          >
             Edit Profile
          </Button>
          <Button
-            component={RouterLink}
-            to="/add-experience"
+            onClick={() => setOnExperienceOpen(true)}
             startIcon={<WorkIcon />}
-            variant="contained"
-            color="default"
+            variant="outlined"
+            color="primary"
             className={classes.button}
          >
             Add Experience
          </Button>
          <Button
-            component={RouterLink}
-            to="/add-education"
+            onClick={() => setOnEducationOpen(true)}
             startIcon={<SchoolIcon />}
-            variant="contained"
-            color="default"
+            variant="outlined"
+            color="primary"
             className={classes.button}
          >
             Add Education

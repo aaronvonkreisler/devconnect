@@ -1,38 +1,35 @@
 import React, { useState } from 'react';
-import { Link as RouterLink, withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import {
-   Button,
-   Card,
-   Checkbox,
-   Container,
+   makeStyles,
+   Dialog,
+   DialogTitle,
+   DialogContent,
+   DialogActions,
    FormControlLabel,
+   FormControl,
+   Button,
+   Checkbox,
    TextField,
-   Typography,
 } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
-import { addEducation } from '../../actions/profile';
+
+import { addEducation } from '../../../actions/profile';
 
 const useStyles = makeStyles((theme) => ({
-   root: {
-      '& .MuiTextField-root': {
-         marginTop: theme.spacing(2),
-      },
-      '& .MuiButtonBase-root': {
-         margin: theme.spacing(2),
-      },
-   },
-   title: {
-      marginTop: theme.spacing(2),
-      marginBottom: theme.spacing(2),
-   },
    formControl: {
-      marginTop: theme.spacing(2),
+      margin: theme.spacing(1),
+   },
+   container: {
+      paddingRight: theme.spacing(1),
    },
 }));
 
-const AddEducation = ({ addEducation, history }) => {
+const AddEducation = ({
+   addEducation,
+   onEducationOpen,
+   setOnEducationOpen,
+}) => {
    const classes = useStyles();
    const [formData, setFormData] = useState({
       school: '',
@@ -43,7 +40,7 @@ const AddEducation = ({ addEducation, history }) => {
       current: false,
       description: '',
    });
-   const [toDateDisabled, toggleDisabled] = useState(false);
+
    const {
       school,
       degree,
@@ -54,40 +51,44 @@ const AddEducation = ({ addEducation, history }) => {
       description,
    } = formData;
 
-   const onChange = (e) =>
-      setFormData({ ...formData, [e.target.name]: e.target.value });
+   const handleClose = () => {
+      setOnEducationOpen(false);
+   };
 
-   const onFormSubmit = (e) => {
+   const onChange = (e) => {
+      setFormData({ ...formData, [e.target.name]: e.target.value });
+   };
+
+   const onEducationSubmit = (e) => {
       e.preventDefault();
-      addEducation(formData, history);
+      addEducation(formData);
+      setFormData({
+         school: '',
+         degree: '',
+         fieldofstudy: '',
+         from: '',
+         to: '',
+         current: false,
+         description: '',
+      });
    };
    return (
-      <Container style={{ marginTop: '2rem' }}>
-         <Card>
-            <Container>
-               <div className={classes.title}>
-                  <Typography variant="h4">Add Your Education</Typography>
-                  <Typography variant="body1">
-                     <i className="fas fa-code-branch"></i> Add any school or
-                     bootcamp that you have attended
-                  </Typography>
-                  <Typography variant="caption">* = required field</Typography>
-               </div>
-               <form className={classes.root} onSubmit={(e) => onFormSubmit(e)}>
+      <Dialog open={onEducationOpen} onClose={handleClose} maxWidth="sm">
+         <DialogTitle>Add Education</DialogTitle>
+         <DialogContent dividers>
+            <div className={classes.container}>
+               <FormControl className={classes.formControl} fullWidth>
                   <TextField
-                     fullWidth
-                     variant="outlined"
                      type="text"
-                     label="School or Bootcamp"
+                     label="School or Program"
                      name="school"
                      required
                      value={school}
                      onChange={(e) => onChange(e)}
                   />
-
+               </FormControl>
+               <FormControl className={classes.formControl} fullWidth>
                   <TextField
-                     fullWidth
-                     variant="outlined"
                      type="text"
                      label="Degree or Certificate"
                      name="degree"
@@ -95,27 +96,29 @@ const AddEducation = ({ addEducation, history }) => {
                      value={degree}
                      onChange={(e) => onChange(e)}
                   />
-
+               </FormControl>
+               <FormControl className={classes.formControl} fullWidth>
                   <TextField
-                     fullWidth
-                     variant="outlined"
                      type="text"
                      label="Field of Study"
                      name="fieldofstudy"
+                     required
                      value={fieldofstudy}
                      onChange={(e) => onChange(e)}
                   />
-
-                  <Typography variant="h6">From Date</Typography>
+               </FormControl>
+               <FormControl className={classes.formControl} fullWidth>
                   <TextField
-                     fullWidth
-                     variant="outlined"
+                     label="From Date"
                      type="date"
                      name="from"
                      value={from}
+                     required
+                     InputLabelProps={{ shrink: true }}
                      onChange={(e) => onChange(e)}
                   />
-
+               </FormControl>
+               <FormControl className={classes.formControl} fullWidth>
                   <FormControlLabel
                      control={
                         <Checkbox
@@ -127,50 +130,45 @@ const AddEducation = ({ addEducation, history }) => {
                                  ...formData,
                                  current: !current,
                               });
-                              toggleDisabled(!toDateDisabled);
                            }}
                         />
                      }
                      label="Currently Enrolled"
                   />
-
-                  <Typography variant="h6">To Date</Typography>
+               </FormControl>
+               <FormControl className={classes.formControl} fullWidth>
                   <TextField
-                     fullWidth
-                     variant="outlined"
+                     label="To Date"
                      type="date"
                      name="to"
                      value={to}
+                     InputLabelProps={{ shrink: true }}
                      onChange={(e) => onChange(e)}
-                     disabled={toDateDisabled}
+                     disabled={current}
                   />
-
+               </FormControl>
+               <FormControl className={classes.formControl} fullWidth>
                   <TextField
-                     fullWidth
                      name="description"
                      variant="outlined"
                      multiline
                      rows={5}
-                     label="Program Description"
+                     label="Job Description"
                      value={description}
                      onChange={(e) => onChange(e)}
                   />
-
-                  <Button type="submit" variant="contained" color="primary">
-                     Add Education
-                  </Button>
-                  <Button
-                     variant="contained"
-                     color="default"
-                     component={RouterLink}
-                     to="/dashboard"
-                  >
-                     Go Back
-                  </Button>
-               </form>
-            </Container>
-         </Card>
-      </Container>
+               </FormControl>
+            </div>
+         </DialogContent>
+         <DialogActions>
+            <Button onClick={handleClose} color="primary">
+               Cancel
+            </Button>
+            <Button onClick={onEducationSubmit} color="primary">
+               Add Education
+            </Button>
+         </DialogActions>
+      </Dialog>
    );
 };
 
@@ -178,4 +176,4 @@ AddEducation.propTypes = {
    addEducation: PropTypes.func.isRequired,
 };
 
-export default connect(null, { addEducation })(withRouter(AddEducation));
+export default connect(null, { addEducation })(AddEducation);

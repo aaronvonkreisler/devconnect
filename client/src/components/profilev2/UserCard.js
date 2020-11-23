@@ -37,14 +37,7 @@ const useStyles = makeStyles((theme) => ({
       textAlign: 'left',
       margin: theme.spacing(2),
    },
-   metrics: {
-      display: 'flex',
-      marginTop: theme.spacing(0.5),
-      marginBottom: theme.spacing(0.5),
-      flexDirection: 'row',
-      justifyContent: 'space-evenly',
-      color: '#A9A9A9',
-   },
+
    techStack: {
       display: 'flex',
       flexDirection: 'row',
@@ -84,6 +77,7 @@ const UserCard = ({
    loading,
 }) => {
    const classes = useStyles();
+
    return (
       <React.Fragment>
          {loading ? (
@@ -110,18 +104,13 @@ const UserCard = ({
                               variant="outlined"
                               size="small"
                               component={RouterLink}
-                              to="/edit-profile"
+                              to="/dashboard"
                            >
                               Edit Profile
                            </Button>
                         )}
                   </div>
-                  <div className={classes.cardTop}>
-                     <div>
-                        <p>Posts</p>
-                        <p>{posts ? posts.length : 0}</p>
-                     </div>
-                  </div>
+
                   <Divider variant="middle" />
                   <div>
                      {bio && (

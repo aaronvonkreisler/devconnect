@@ -7,6 +7,8 @@ import {
    PROFILE_ERROR,
    CLEAR_PROFILE,
    UPDATE_PROFILE,
+   EXPERIENCE_ERROR,
+   EDUCATION_ERROR,
 } from '../actions/types';
 
 const initialState = {
@@ -42,6 +44,12 @@ export default (state = initialState, action) => {
             error: payload,
             loading: false,
             profile: null,
+         };
+      case EXPERIENCE_ERROR:
+      case EDUCATION_ERROR:
+         return {
+            ...state,
+            error: payload,
          };
       case CLEAR_PROFILE:
          return {

@@ -26,14 +26,12 @@ const Posts = ({ getPosts, post: { posts, loading } }) => {
    return loading ? (
       <Spinner />
    ) : (
-      <div>
-         <List className={classes.list} subheader={<li />}>
-            <PostEditor />
-            {posts.map((post) => (
-               <PostListItem key={post._id} post={post} button={false} />
-            ))}
-         </List>
-      </div>
+      <List className={classes.list} subheader={<li />}>
+         <PostEditor />
+         {posts.map((post) => (
+            <PostListItem key={post._id} post={post} button={false} />
+         ))}
+      </List>
    );
 };
 

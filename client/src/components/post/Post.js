@@ -57,7 +57,7 @@ const Post = ({ getOnePost, post: { post, loading }, match, user }) => {
    return loading || post === null ? (
       <Spinner />
    ) : (
-      <Container className={classes.container}>
+      <React.Fragment>
          <div>
             <List>
                <ListSubheader className={classes.header}>
@@ -86,7 +86,6 @@ const Post = ({ getOnePost, post: { post, loading }, match, user }) => {
                </div>
             </List>
          </div>
-
          <CommentForm
             modalOpen={modalOpen}
             setModalOpen={setModalOpen}
@@ -94,7 +93,7 @@ const Post = ({ getOnePost, post: { post, loading }, match, user }) => {
             post={post}
             user={user}
          />
-      </Container>
+      </React.Fragment>
    );
 };
 
