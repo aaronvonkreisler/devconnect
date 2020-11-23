@@ -1,14 +1,13 @@
 import React, { Fragment, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { Provider } from 'react-redux';
+
 import store from './store';
 
 import './App.css';
-import './styles/_app.scss';
+
 import Alert from './components/layout/Alert';
-
 import Dashboard from './components/dashboard/Dashboard';
-
 import Landing from './components/layout/Landing';
 import Login from './components/auth/Login';
 import Navigation from './components/layout/Navigation';
